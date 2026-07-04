@@ -256,6 +256,17 @@ h1, h2, h3, h4, .navbar-brand { font-family: var(--font-display); letter-spacing
 .section-head.text-center { margin-inline: auto; }
 .section-head.text-center .section-sub { margin-inline: auto; }
 
+/* ---- Résumé timeline ---- */
+.resume-head { margin-bottom: 3rem; }
+.timeline { position: relative; max-width: 760px; }
+.timeline::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--border-strong); }
+.timeline-item { position: relative; padding-left: 2.5rem; padding-bottom: 2rem; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12); }
+.timeline-role { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; margin: 0; }
+.timeline-meta { color: var(--accent); font-weight: 600; font-size: 0.9rem; margin: 0.15rem 0 0.5rem; }
+.timeline-desc { color: var(--muted); margin: 0; line-height: 1.6; }
+
 /* ============================================================
    MOTION — entrance + scroll reveals (copied feel from ref)
    ============================================================ */
