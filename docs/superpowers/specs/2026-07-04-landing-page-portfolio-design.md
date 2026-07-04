@@ -18,22 +18,26 @@ A two-layer portfolio ("Both" model, confirmed by user):
 | Decision | Default | Why |
 |---|---|---|
 | Niches | Trades/local services, Health (dental/physio), SaaS launch, E-commerce product, Real estate, Restaurant/hospitality | Broad AU-relevant spread; trades + health are the highest-paying local lead-gen niches |
-| Tech stack | Static HTML/CSS/vanilla JS, one folder per page | Fastest to build, 100/100 PageSpeed is itself a sales pitch, free hosting |
-| Hosting | Vercel or Netlify, custom domain | Free tier, instant deploys, HTTPS |
+| Tech stack | PHP (.php pages) + CSS + vanilla JS, one folder per page | **User-confirmed: PHP, not HTML.** Same instant page speed as static, plus shared includes and native form handling |
+| Hosting | Any PHP host (cPanel/shared hosting or small VPS), custom domain, HTTPS | PHP rules out Vercel/Netlify static free tiers; standard LAMP hosting is cheap and the user likely has agency hosting available |
 | Conversion goal | "Book a free call" (Cal.com embed) + short contact form fallback | Lowest-friction path to a sales conversation |
 | Branding | Personal brand (your name) | Freelance credibility; can rebrand later |
 
 ## Site structure
 
 ```
-/                      → The Hub (your portfolio landing page)
-/demos/trades/         → "Apex Plumbing" — emergency plumber lead-gen page
-/demos/dental/         → "Brightside Dental" — booking-focused clinic page
-/demos/saas/           → "Launchpad" — SaaS waitlist/launch page
-/demos/ecommerce/      → "Single-product" promo page
-/demos/realestate/     → Property/agent lead capture page
-/demos/restaurant/     → Booking + menu showcase page
+/index.php                     → The Hub (your portfolio landing page)
+/demos/trades/index.php        → "Apex Plumbing" — emergency plumber lead-gen page
+/demos/dental/index.php        → "Brightside Dental" — booking-focused clinic page
+/demos/saas/index.php          → "Launchpad" — SaaS waitlist/launch page
+/demos/ecommerce/index.php     → "Single-product" promo page
+/demos/realestate/index.php    → Property/agent lead capture page
+/demos/restaurant/index.php    → Booking + menu showcase page
+/includes/                     → Hub-only shared partials (head meta, demo badge, form handler)
+/contact.php                   → POST handler for the Hub contact form (PHPMailer)
 ```
+
+All pages are `.php`. The Hub uses `/includes/` partials (`require`) for repeated chrome; each demo stays **self-contained in its own folder** (its own CSS/JS/images, no dependency on `/includes/`) so a demo can still be zipped and handed to a client as-is — only the shared "Demo by [you]" badge is injected via a tiny include that's trivially removable.
 
 ## The Hub — section-by-section
 
@@ -65,9 +69,10 @@ A two-layer portfolio ("Both" model, confirmed by user):
 
 ## Technical
 
-- Plain HTML/CSS/JS, shared nothing between demos (each self-contained folder) so any demo can be handed to a client as-is.
+- PHP pages (no framework — plain PHP templates), CSS and vanilla JS per page; demos are self-contained folders so any demo can be handed to a client as-is.
 - Fonts self-hosted, images in AVIF/WebP with proper sizing, zero render-blocking third-party scripts (Cal.com embed lazy-loaded).
-- Form handling: Netlify Forms or Formspree (no backend).
+- Form handling: native PHP endpoint (`contact.php`) using PHPMailer via SMTP, with honeypot + rate-limit spam protection. No third-party form service needed.
+- Local development: PHP built-in server (`php -S localhost:8000`) — no XAMPP required unless preferred.
 - SEO on the Hub: title/meta targeting "landing page designer [city/AU]", Person + Service JSON-LD schema, sitemap, OG images. Demos set to `noindex` (they're fictional businesses — you don't want them ranking).
 - Analytics: Plausible or GA4 to see which demos get attention.
 - Git repo from day one; deploy on push.
