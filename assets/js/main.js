@@ -98,17 +98,17 @@
         })
         .then(function (data) {
           if (data.success) {
-            status.textContent = 'Thanks — I’ll reply within 24 hours.';
+            status.textContent = 'Thanks! I’ll reply within 24 hours.';
             status.classList.add('ok');
             form.reset();
             form.classList.remove('was-validated');
           } else {
-            status.textContent = 'Something went wrong — please email me directly.';
+            status.textContent = 'Something went wrong. Please email me directly.';
             status.classList.add('err');
           }
         })
         .catch(function () {
-          status.textContent = 'Something went wrong — please email me directly at jecortina13@gmail.com.';
+          status.textContent = 'Something went wrong. Please email me directly at jecortina13@gmail.com.';
           status.classList.add('err');
         })
         .finally(function () { btn.disabled = false; });
