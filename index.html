@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edison — Web Developer | Websites, WooCommerce &amp; Landing Pages</title>
     <meta name="description" content="I design and build fast, conversion-focused websites, WooCommerce stores and landing pages for businesses in Sydney and across Australia.">
     <meta property="og:title" content="Edison — Web Developer">
-    <meta property="og:description" content="Websites, WooCommerce stores and landing pages — fast, conversion-focused, hand-coded.">
+    <meta property="og:description" content="Websites, WooCommerce stores and landing pages, hand-coded, fast and conversion-focused.">
     <meta property="og:image" content="https://edisonc0239.github.io/Portfolio/assets/img/og.jpg">
     <meta property="og:type" content="website">
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/glightbox/glightbox.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
@@ -20,77 +22,116 @@
       "name": "Edison",
       "jobTitle": "Web Developer",
       "email": "mailto:jecortina13@gmail.com",
-      "url": "https://edisonc0239.github.io/Portfolio/"
+      "url": "https://edisonc0239.github.io/Portfolio/",
+      "knowsAbout": ["Web Development", "WooCommerce", "Landing Pages", "WordPress"],
+      "address": { "@type": "PostalAddress", "addressLocality": "Sydney", "addressCountry": "AU" }
     }
     </script>
 </head>
 <body>
 
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg site-nav sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#hero">Edison<span class="brand-dot">.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu"
+                    aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav-menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                    <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-primary btn-sm" href="#contact">Start a project</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!-- HERO -->
-    <header id="hero" class="d-flex align-items-center min-vh-100">
-        <div class="container text-center">
-            <h1 class="display-1 fw-bold">Websites that turn<br>clicks into customers.</h1>
-            <p class="lead mt-3">Landing pages, WooCommerce stores and full business websites — designed, built and launched fast.</p>
-            <a class="btn btn-primary btn-lg mt-4" href="#contact">Book a free call</a>
+    <header id="hero" class="hero d-flex align-items-center">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="container hero-inner">
+            <p class="eyebrow reveal">Web developer · Sydney, AU</p>
+            <h1 class="hero-title reveal">Websites that turn clicks into <span class="accent">customers</span>.</h1>
+            <p class="hero-sub lead reveal">Landing pages, WooCommerce stores and full business websites, hand-coded to load fast and convert.</p>
+            <div class="hero-cta reveal">
+                <a class="btn btn-primary btn-lg" href="#contact">Start a project</a>
+                <a class="btn btn-outline-light btn-lg" href="#work">View work</a>
+            </div>
         </div>
     </header>
 
     <!-- PROOF BAR -->
-    <section id="proof" class="py-4 border-top border-bottom">
+    <section id="proof" class="proof">
         <div class="container">
-            <div class="row text-center gy-3">
-                <div class="col-md-4"><strong>&lt;1.5s</strong> load times</div>
-                <div class="col-md-4"><strong>95+</strong> Lighthouse scores</div>
-                <div class="col-md-4"><strong>7-day</strong> typical turnaround</div>
+            <div class="row proof-row text-center text-md-start">
+                <div class="col-md-4 proof-item">
+                    <span class="proof-num">&lt;1.5s</span>
+                    <span class="proof-label">Typical load time</span>
+                </div>
+                <div class="col-md-4 proof-item">
+                    <span class="proof-num">95+</span>
+                    <span class="proof-label">Lighthouse scores</span>
+                </div>
+                <div class="col-md-4 proof-item">
+                    <span class="proof-num">7 days</span>
+                    <span class="proof-label">Landing page turnaround</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- WORK GALLERY -->
-    <section id="work" class="py-5">
+    <section id="work" class="section">
         <div class="container">
-            <h2 class="mb-5">Selected work</h2>
+            <div class="section-head reveal">
+                <h2 class="section-title">Selected work</h2>
+                <p class="section-sub">Hover a project to scan the full page. Click to open it larger.</p>
+            </div>
             <div class="row g-4">
                 <!-- One card per project. To add work: copy this column block. -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 reveal">
                     <a class="work-card d-block"
                        href="assets/img/work/project-one.png"
-                       data-glightbox="title: Project One; description: Lead-gen landing page — Trades">
-                        <span class="work-frame d-block overflow-hidden rounded-3">
+                       data-glightbox="title: Project One; description: Lead-gen landing page, Trades">
+                        <span class="work-frame d-block overflow-hidden">
                             <img src="assets/img/work/project-one.png"
-                                 alt="Project One — full page design" loading="lazy">
+                                 alt="Project One, full page design" loading="lazy">
                         </span>
-                        <span class="d-flex justify-content-between mt-2">
+                        <span class="work-meta">
                             <span class="work-title">Project One</span>
-                            <span class="work-niche text-secondary">Trades</span>
+                            <span class="work-niche">Trades</span>
                         </span>
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 reveal">
                     <a class="work-card d-block"
                        href="assets/img/work/project-two.png"
-                       data-glightbox="title: Project Two; description: Booking landing page — Health">
-                        <span class="work-frame d-block overflow-hidden rounded-3">
+                       data-glightbox="title: Project Two; description: Booking landing page, Health">
+                        <span class="work-frame d-block overflow-hidden">
                             <img src="assets/img/work/project-two.png"
-                                 alt="Project Two — full page design" loading="lazy">
+                                 alt="Project Two, full page design" loading="lazy">
                         </span>
-                        <span class="d-flex justify-content-between mt-2">
+                        <span class="work-meta">
                             <span class="work-title">Project Two</span>
-                            <span class="work-niche text-secondary">Health</span>
+                            <span class="work-niche">Health</span>
                         </span>
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 reveal">
                     <a class="work-card d-block"
                        href="assets/img/work/project-three.png"
-                       data-glightbox="title: Project Three; description: Launch landing page — SaaS">
-                        <span class="work-frame d-block overflow-hidden rounded-3">
+                       data-glightbox="title: Project Three; description: Launch landing page, SaaS">
+                        <span class="work-frame d-block overflow-hidden">
                             <img src="assets/img/work/project-three.png"
-                                 alt="Project Three — full page design" loading="lazy">
+                                 alt="Project Three, full page design" loading="lazy">
                         </span>
-                        <span class="d-flex justify-content-between mt-2">
+                        <span class="work-meta">
                             <span class="work-title">Project Three</span>
-                            <span class="work-niche text-secondary">SaaS</span>
+                            <span class="work-niche">SaaS</span>
                         </span>
                     </a>
                 </div>
@@ -99,84 +140,125 @@
     </section>
 
     <!-- PROCESS -->
-    <section id="process" class="py-5">
+    <section id="process" class="section section-alt">
         <div class="container">
-            <h2 class="mb-5">How it works</h2>
-            <div class="row g-4">
-                <div class="col-md-3"><h3 class="h5">1. Brief</h3><p>A short call to understand your offer and customers.</p></div>
-                <div class="col-md-3"><h3 class="h5">2. Design</h3><p>Designed around one goal: turning your visitors into customers.</p></div>
-                <div class="col-md-3"><h3 class="h5">3. Build</h3><p>Hand-coded, fast, responsive. No bloated templates.</p></div>
-                <div class="col-md-3"><h3 class="h5">4. Launch</h3><p>Live on your domain, typically within 7 days.</p></div>
+            <div class="section-head reveal">
+                <h2 class="section-title">How it works</h2>
+                <p class="section-sub">A simple path from first call to launch day.</p>
+            </div>
+            <div class="row g-4 steps">
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="step">
+                        <span class="step-num">01</span>
+                        <h3 class="step-title">Brief</h3>
+                        <p class="step-body">A short call to understand your offer, your customers and your goals.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="step">
+                        <span class="step-num">02</span>
+                        <h3 class="step-title">Design</h3>
+                        <p class="step-body">A layout built around one job: turning your visitors into customers.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="step">
+                        <span class="step-num">03</span>
+                        <h3 class="step-title">Build</h3>
+                        <p class="step-body">Hand-coded, fast and responsive. No bloated page-builder templates.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="step">
+                        <span class="step-num">04</span>
+                        <h3 class="step-title">Launch</h3>
+                        <p class="step-body">Live on your domain, tested across devices, ready to bring in leads.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="py-5">
+    <section id="about" class="section">
         <div class="container">
             <div class="row align-items-center g-5">
-                <div class="col-md-4">
-                    <img src="assets/img/portrait.png" alt="Edison" class="img-fluid rounded-3" loading="lazy">
+                <div class="col-lg-5 reveal">
+                    <div class="about-portrait">
+                        <img src="assets/img/portrait.png" alt="Edison" class="img-fluid" loading="lazy">
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <h2>About</h2>
-                    <p>I'm Edison, a web developer based in Sydney. I build landing pages, WooCommerce stores and full business websites — for trades, clinics, startups and everything between. Whether it's a single high-converting page or a complete online store, everything I ship is hand-coded, fast, and built around one goal: turning your visitors into customers.</p>
+                <div class="col-lg-7 reveal">
+                    <h2 class="section-title">About</h2>
+                    <p class="about-lead">I'm Edison, a web developer based in Sydney.</p>
+                    <p class="about-body">I build landing pages, WooCommerce stores and full business websites for trades, clinics, startups and everything in between. Whether it's a single high-converting page or a complete online store, everything I ship is hand-coded, fast and built around one goal: turning your visitors into customers.</p>
+                    <ul class="about-tags">
+                        <li>Landing pages</li>
+                        <li>WooCommerce</li>
+                        <li>Business websites</li>
+                        <li>WordPress</li>
+                        <li>Performance</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-5">
+    <section id="faq" class="section section-alt">
         <div class="container">
-            <h2 class="mb-4">FAQ</h2>
-            <div class="accordion" id="faq-acc">
-                <div class="accordion-item">
-                    <h3 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#faq-1"
-                                aria-expanded="false" aria-controls="faq-1">
-                            How long does a project take?
-                        </button>
-                    </h3>
-                    <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
-                        <div class="accordion-body">A landing page typically launches within 7 days. Full websites and WooCommerce stores usually take 2–4 weeks depending on scope.</div>
+            <div class="section-head reveal">
+                <h2 class="section-title">Questions, answered</h2>
+            </div>
+            <div class="faq-wrap reveal">
+                <div class="accordion accordion-flush" id="faq-acc">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq-1"
+                                    aria-expanded="false" aria-controls="faq-1">
+                                How long does a project take?
+                            </button>
+                        </h3>
+                        <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
+                            <div class="accordion-body">A landing page typically launches within 7 days. Full websites and WooCommerce stores usually take 2 to 4 weeks depending on scope.</div>
+                        </div>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <h3 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#faq-2"
-                                aria-expanded="false" aria-controls="faq-2">
-                            How many revisions are included?
-                        </button>
-                    </h3>
-                    <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
-                        <div class="accordion-body">Two full revision rounds are included; most projects only need one.</div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq-2"
+                                    aria-expanded="false" aria-controls="faq-2">
+                                How many revisions are included?
+                            </button>
+                        </h3>
+                        <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
+                            <div class="accordion-body">Two full revision rounds are included. Most projects only need one.</div>
+                        </div>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <h3 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#faq-3"
-                                aria-expanded="false" aria-controls="faq-3">
-                            Do you handle hosting and the domain?
-                        </button>
-                    </h3>
-                    <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
-                        <div class="accordion-body">Yes — I can set up fast, low-cost hosting and connect your domain, or hand the files to your existing host.</div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq-3"
+                                    aria-expanded="false" aria-controls="faq-3">
+                                Do you handle hosting and the domain?
+                            </button>
+                        </h3>
+                        <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
+                            <div class="accordion-body">Yes. I can set up fast, low-cost hosting and connect your domain, or hand the files to your existing host.</div>
+                        </div>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <h3 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#faq-4"
-                                aria-expanded="false" aria-controls="faq-4">
-                            Who owns the website when it's done?
-                        </button>
-                    </h3>
-                    <div id="faq-4" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
-                        <div class="accordion-body">You do — full source code and all assets, no lock-in.</div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq-4"
+                                    aria-expanded="false" aria-controls="faq-4">
+                                Who owns the website when it's done?
+                            </button>
+                        </h3>
+                        <div id="faq-4" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
+                            <div class="accordion-body">You do. Full source code and all assets, with no lock-in.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,38 +266,41 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="py-5">
-        <div class="container" style="max-width: 640px;">
-            <h2 class="text-center">Let’s build yours</h2>
-            <div class="text-center my-4">
-                <a class="btn btn-primary btn-lg" href="https://cal.com/CHANGE-ME" target="_blank" rel="noopener">Book a free call</a>
-                <p class="text-secondary mt-3">or send a message:</p>
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-card reveal">
+                <h2 class="section-title text-center">Let's build yours</h2>
+                <p class="contact-sub text-center">Tell me about your project and I'll reply within 24 hours. Prefer to talk it through?
+                    <a href="https://cal.com/CHANGE-ME" target="_blank" rel="noopener">Book a free call</a>.</p>
+                <form id="contact-form" method="POST" action="https://api.web3forms.com/submit" novalidate>
+                    <input type="hidden" name="access_key" value="WEB3FORMS-ACCESS-KEY">
+                    <input type="hidden" name="subject" value="New portfolio enquiry">
+                    <input type="hidden" name="redirect" value="https://edisonc0239.github.io/Portfolio/#contact">
+                    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="mb-3">
+                        <label class="form-label" for="cf-name">Name</label>
+                        <input class="form-control" type="text" id="cf-name" name="name" required maxlength="100">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="cf-email">Email</label>
+                        <input class="form-control" type="email" id="cf-email" name="email" required maxlength="254">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="cf-message">Message</label>
+                        <textarea class="form-control" id="cf-message" name="message" required minlength="10" maxlength="5000" rows="5"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-lg w-100" type="submit">Send message</button>
+                    <p class="form-status" role="status" aria-live="polite"></p>
+                </form>
             </div>
-            <form id="contact-form" method="POST" action="https://api.web3forms.com/submit" novalidate>
-                <input type="hidden" name="access_key" value="WEB3FORMS-ACCESS-KEY">
-                <input type="hidden" name="subject" value="New portfolio enquiry">
-                <input type="hidden" name="redirect" value="https://edisonc0239.github.io/Portfolio/#contact">
-                <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-                <div class="mb-3">
-                    <label class="form-label" for="cf-name">Name</label>
-                    <input class="form-control" type="text" id="cf-name" name="name" required maxlength="100">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="cf-email">Email</label>
-                    <input class="form-control" type="email" id="cf-email" name="email" required maxlength="254">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="cf-message">Message</label>
-                    <textarea class="form-control" id="cf-message" name="message" required minlength="10" maxlength="5000" rows="5"></textarea>
-                </div>
-                <button class="btn btn-primary w-100" type="submit">Send message</button>
-                <p class="form-status mt-3 mb-0" role="status" aria-live="polite"></p>
-            </form>
         </div>
     </section>
 
-    <footer class="py-4 text-center">
-        <p class="mb-0">© <span id="year">2026</span> Edison · <a href="mailto:jecortina13@gmail.com">jecortina13@gmail.com</a></p>
+    <footer class="site-footer">
+        <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <p class="mb-0 fw-bold">Edison<span class="brand-dot">.</span></p>
+            <p class="mb-0 footer-meta">© <span id="year">2026</span> Edison · <a href="mailto:jecortina13@gmail.com">jecortina13@gmail.com</a></p>
+        </div>
     </footer>
 
     <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
