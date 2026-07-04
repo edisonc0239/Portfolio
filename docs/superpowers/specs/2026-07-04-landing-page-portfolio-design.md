@@ -39,7 +39,10 @@ A two-layer portfolio ("Both" model, confirmed by user):
 
 1. **Hero** — massive headline stating the outcome ("Landing pages that turn clicks into customers"), subline with who it's for, primary CTA "Book a free call", and a visual: an animated collage/carousel of the demo pages.
 2. **Proof bar** — page-speed scores, "built in X days", conversion-focused stats. If no client logos yet, use metrics of the demos themselves (Lighthouse 100s).
-3. **Demo gallery** — the core section. Card per niche with a live screenshot/preview, niche label, and "View live demo" link. Hover micro-interactions.
+3. **Demo gallery** — the core section. Card per project with a full-page screenshot in a fixed-height frame, niche label, and CTA.
+   - **Hover (desktop):** the screenshot smoothly pans top-to-bottom through the entire page (~4–6s, CSS `translateY` on a tall image inside `overflow: hidden`; duration proportional to image height so all cards pan at the same speed). Prospects can "read" the whole design without leaving the hub.
+   - **Click:** opens the **live demo page** when one exists — a real fast page is more convincing than any image. For image-only work (past client work, mockups with no live URL), click opens a lightbox instead (GLightbox preferred — MIT-licensed and lighter than lightGallery, which needs a paid commercial license).
+   - **Mobile (no hover):** cards auto-pan gently when scrolled into view (IntersectionObserver); tap goes to live demo/lightbox. Respect `prefers-reduced-motion` — show a static top-of-page crop instead.
 4. **Process** — 3–4 steps ("Brief → Design → Build → Launch in 7 days"). Reduces perceived risk.
 5. **What's included / packages** — optional pricing anchors (e.g., "Landing page — from $X") or "packages" without prices. Prices filter tyre-kickers; decide later.
 6. **About** — short, human, one photo. Clients buy from people.
