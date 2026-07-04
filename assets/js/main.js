@@ -103,6 +103,7 @@
       // rAF loop with lerp smoothing, kicked by scroll — smooth trailing dot
       // travel that settles a few frames after scrolling stops.
       var tlTarget = 0, tlCurrent = 0, tlRunning = false;
+      var tlItems = [].slice.call(tl.querySelectorAll('.tl-item'));
       var measureTl = function () {
         var r = tl.getBoundingClientRect();
         var vh = window.innerHeight || document.documentElement.clientHeight;
@@ -114,6 +115,11 @@
         var settled = Math.abs(tlTarget - tlCurrent) < 0.0004;
         if (settled) tlCurrent = tlTarget;
         tlFill.style.height = (tlCurrent * 100) + '%';
+        // Light up each year as the green line reaches it.
+        var fillPx = tlCurrent * tl.offsetHeight;
+        for (var i = 0; i < tlItems.length; i++) {
+          tlItems[i].classList.toggle('is-reached', tlItems[i].offsetTop <= fillPx + 24);
+        }
         if (!settled) requestAnimationFrame(tlTick); else tlRunning = false;
       };
       var startTl = function () { if (!tlRunning) { tlRunning = true; requestAnimationFrame(tlTick); } };
