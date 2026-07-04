@@ -223,31 +223,6 @@ h1, h2, h3, h4, .navbar-brand {
 }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; }
 
-/* ---- Proof bar ---- */
-.proof {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: var(--ink-2);
-}
-.proof-row { padding-block: 0.5rem; }
-.proof-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding-block: 2rem;
-}
-.proof-num {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  color: var(--accent);
-  line-height: 1;
-}
-.proof-label { color: var(--muted); font-size: 0.95rem; }
-@media (min-width: 768px) {
-  .proof-item + .proof-item { border-left: 1px solid var(--line); padding-left: 2rem; }
-}
-
 /* ---- Section scaffolding ---- */
 .section { padding-block: clamp(4rem, 9vw, 7.5rem); }
 .section-alt { background: var(--ink-3); }
