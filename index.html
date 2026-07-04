@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
     <meta name="twitter:title" content="Edison — Web Developer">
     <meta name="twitter:description" content="Websites, WooCommerce stores and landing pages, hand-coded, fast and conversion-focused.">
     <meta name="twitter:image" content="https://edisonc0239.github.io/Portfolio/assets/img/og.jpg">
-    <meta name="theme-color" content="#0b0b0f">
+    <meta name="theme-color" content="#f8fafc">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://edisonc0239.github.io/Portfolio/">
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -22,7 +22,7 @@
     <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/glightbox/glightbox.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/custom.css?v=3">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -38,21 +38,23 @@
 </head>
 <body>
 
-    <!-- NAV -->
-    <nav class="navbar navbar-expand-lg site-nav sticky-top">
-        <div class="container">
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- NAV (floating pill) -->
+    <nav class="navbar navbar-expand-md site-nav">
+        <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="#hero">Edison<span class="brand-dot">.</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu"
                     aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="nav-menu">
-                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <ul class="navbar-nav ms-auto align-items-md-center">
                     <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
                     <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                    <li class="nav-item ms-lg-3"><a class="btn btn-primary btn-sm" href="#contact">Start a project</a></li>
+                    <li class="nav-item ms-md-2"><a class="btn btn-primary btn-sm" href="#contact">Start a project</a></li>
                 </ul>
             </div>
         </div>
@@ -62,10 +64,10 @@
     <header id="hero" class="hero d-flex align-items-center">
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="container hero-inner">
-            <p class="eyebrow reveal">Web developer · Sydney, AU</p>
-            <h1 class="hero-title reveal">Websites that turn clicks into <span class="accent">customers</span>.</h1>
-            <p class="hero-sub lead reveal">Landing pages, WooCommerce stores and full business websites, hand-coded to load fast and convert.</p>
-            <div class="hero-cta reveal">
+            <p class="eyebrow hero-reveal hero-reveal-1">Web developer · Sydney, AU</p>
+            <h1 class="hero-title hero-reveal hero-reveal-2">Websites that turn clicks into <span class="accent">customers</span>.</h1>
+            <p class="hero-sub lead hero-reveal hero-reveal-3">Landing pages, WooCommerce stores and full business websites, hand-coded to load fast and convert.</p>
+            <div class="hero-cta hero-reveal hero-reveal-4">
                 <a class="btn btn-primary btn-lg" href="#contact">Start a project</a>
                 <a class="btn btn-outline-light btn-lg" href="#work">View work</a>
             </div>
@@ -327,6 +329,6 @@
 
     <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="assets/vendor/glightbox/glightbox.min.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/main.js?v=3" defer></script>
 </body>
 </html>

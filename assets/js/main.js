@@ -2,6 +2,9 @@
 (function () {
   'use strict';
 
+  // Mark JS active so reveal elements only start hidden when we can un-hide them.
+  document.documentElement.classList.add('js');
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasHover = window.matchMedia('(hover: hover)').matches;
 
@@ -87,10 +90,34 @@
     moreBtn.addEventListener('click', function () {
       shown = Math.min(shown + GALLERY_STEP, items.length);
       render();
+      // Newly shown cards animate in immediately (user is looking at them).
+      items.forEach(function (it) { if (!it.hidden) it.classList.add('is-visible'); });
       if (lightbox && lightbox.reload) lightbox.reload();
     });
   } else if (moreBtn) {
     moreBtn.hidden = true;
+  }
+
+  // --- Scroll reveal: fade-up as elements enter the viewport ---
+  var revealEls = [].slice.call(document.querySelectorAll('.reveal'));
+  var show = function (el) { el.classList.add('is-visible'); };
+  var inView = function (el) {
+    var r = el.getBoundingClientRect();
+    return r.top < (window.innerHeight || document.documentElement.clientHeight) && r.bottom > 0;
+  };
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(show);
+  } else {
+    // Reveal whatever is already on screen at load, observe the rest.
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function (el) { if (inView(el)) { show(el); } else { io.observe(el); } });
+    // Safety net: if anything is still hidden while sitting in the viewport
+    // (e.g. an environment where IO never fires), reveal it on scroll.
+    var sweep = function () { revealEls.forEach(function (el) { if (!el.classList.contains('is-visible') && inView(el)) show(el); }); };
+    window.addEventListener('scroll', sweep, { passive: true });
+    window.addEventListener('load', sweep);
   }
 
   // --- Footer year ---
