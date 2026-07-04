@@ -18,12 +18,12 @@
     <meta name="theme-color" content="#f8fafc">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://edisonc0239.github.io/Portfolio/">
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
     <link rel="preload" href="assets/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/glightbox/glightbox.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css?v=14">
+    <link rel="stylesheet" href="assets/css/custom.css?v=17">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -42,6 +42,7 @@
     <!-- PRELOADER -->
     <div id="preloader" class="preloader">
         <div class="preloader-inner">
+            <img class="preloader-logo" src="assets/img/logo.svg" alt="">
             <span class="preloader-brand">Loading<span class="brand-dot">.</span></span>
             <span class="preloader-count">0%</span>
         </div>
@@ -50,11 +51,11 @@
     <div class="scroll-progress" aria-hidden="true"></div>
 
     <!-- Mobile-only top-center logo (menu docks at the bottom on mobile) -->
-    <a class="mobile-brand" href="#hero">Edison<span class="brand-dot">.</span></a>
+    <a class="mobile-brand" href="#hero"><img class="brand-logo" src="assets/img/logo.svg" alt=""><span>Edison<span class="brand-dot">.</span></span></a>
 
     <!-- NAV (floating pill; docks to bottom on mobile) -->
     <nav class="site-nav">
-        <a class="nav-brand" href="#hero">Edison<span class="brand-dot">.</span></a>
+        <a class="nav-brand" href="#hero"><img class="brand-logo" src="assets/img/logo.svg" alt="Edison logo"><span>Edison<span class="brand-dot">.</span></span></a>
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#work">Work</a></li>
@@ -84,11 +85,11 @@
                 <div class="col-lg-5 hero-reveal hero-reveal-3 d-none d-lg-block">
                     <div class="hero-visual">
                         <div class="hero-card">
-                            <img src="assets/img/portrait.png" alt="Edison, web developer">
+                            <img src="assets/img/hero-visual.png" alt="Edison, web developer">
                         </div>
                         <span class="hero-badge hero-badge-tr" aria-hidden="true">&lt;/&gt;</span>
                         <span class="hero-badge hero-badge-bl" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
                         </span>
                     </div>
                 </div>
@@ -245,26 +246,30 @@
     <section id="tech" class="section section-alt">
         <div class="container tech-wrap">
             <div class="section-head text-center reveal">
-                <h2 class="section-title">Skills</h2>
-                <p class="section-sub">The technologies I design and build with.</p>
+                <h2 class="section-title">Tech Stack</h2>
             </div>
             <div class="tech-grid reveal">
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/wordpress.svg" alt="WordPress" loading="lazy"><img class="color" src="assets/img/tech/wordpress-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/woocommerce.svg" alt="WooCommerce" loading="lazy"><img class="color" src="assets/img/tech/woocommerce-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/php.svg" alt="PHP" loading="lazy"><img class="color" src="assets/img/tech/php-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/javascript.svg" alt="JavaScript" loading="lazy"><img class="color" src="assets/img/tech/javascript-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/html5.svg" alt="HTML5" loading="lazy"><img class="color" src="assets/img/tech/html5-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/css.svg" alt="CSS" loading="lazy"><img class="color" src="assets/img/tech/css-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/sass.svg" alt="Sass" loading="lazy"><img class="color" src="assets/img/tech/sass-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/bootstrap.svg" alt="Bootstrap" loading="lazy"><img class="color" src="assets/img/tech/bootstrap-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/jquery.svg" alt="jQuery" loading="lazy"><img class="color" src="assets/img/tech/jquery-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/react.svg" alt="React" loading="lazy"><img class="color" src="assets/img/tech/react-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/nodedotjs.svg" alt="Node.js" loading="lazy"><img class="color" src="assets/img/tech/nodedotjs-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/mysql.svg" alt="MySQL" loading="lazy"><img class="color" src="assets/img/tech/mysql-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/figma.svg" alt="Figma" loading="lazy"><img class="color" src="assets/img/tech/figma-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/git.svg" alt="Git" loading="lazy"><img class="color" src="assets/img/tech/git-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/github.svg" alt="GitHub" loading="lazy"><img class="color" src="assets/img/tech/github-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
-                <div class="tech-item"><span class="tech-api">API</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/wordpress.svg" alt="WordPress" loading="lazy"><img class="color" src="assets/img/tech/wordpress-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">WordPress</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/woocommerce.svg" alt="WooCommerce" loading="lazy"><img class="color" src="assets/img/tech/woocommerce-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">WooCommerce</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/php.svg" alt="PHP" loading="lazy"><img class="color" src="assets/img/tech/php-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">PHP</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/javascript.svg" alt="JavaScript" loading="lazy"><img class="color" src="assets/img/tech/javascript-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">JavaScript</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/html5.svg" alt="HTML5" loading="lazy"><img class="color" src="assets/img/tech/html5-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">HTML5</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/css.svg" alt="CSS" loading="lazy"><img class="color" src="assets/img/tech/css-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">CSS</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/sass.svg" alt="Sass" loading="lazy"><img class="color" src="assets/img/tech/sass-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">Sass</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/bootstrap.svg" alt="Bootstrap" loading="lazy"><img class="color" src="assets/img/tech/bootstrap-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">Bootstrap</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/jquery.svg" alt="jQuery" loading="lazy"><img class="color" src="assets/img/tech/jquery-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">jQuery</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/react.svg" alt="React" loading="lazy"><img class="color" src="assets/img/tech/react-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">React</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/nodedotjs.svg" alt="Node.js" loading="lazy"><img class="color" src="assets/img/tech/nodedotjs-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">Node.js</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/mysql.svg" alt="MySQL" loading="lazy"><img class="color" src="assets/img/tech/mysql-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">MySQL</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/postgresql.svg" alt="PostgreSQL" loading="lazy"><img class="color" src="assets/img/tech/postgresql-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">PostgreSQL</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/mongodb.svg" alt="MongoDB" loading="lazy"><img class="color" src="assets/img/tech/mongodb-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">MongoDB</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/firebase.svg" alt="Firebase" loading="lazy"><img class="color" src="assets/img/tech/firebase-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">Firebase</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/figma.svg" alt="Figma" loading="lazy"><img class="color" src="assets/img/tech/figma-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">Figma</span></div>
+                <div class="tech-item"><span class="tech-logo tech-logo--c"><img class="mono" src="assets/img/tech/photoshop.svg" alt="Photoshop" loading="lazy"><img class="color" src="assets/img/tech/photoshop-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">Photoshop</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/git.svg" alt="Git" loading="lazy"><img class="color" src="assets/img/tech/git-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">Git</span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/github.svg" alt="GitHub" loading="lazy"><img class="color" src="assets/img/tech/github-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">GitHub</span></div>
+                <div class="tech-item"><span class="tech-logo tech-logo--c"><img class="mono" src="assets/img/tech/vscode.svg" alt="VS Code" loading="lazy"><img class="color" src="assets/img/tech/vscode-c.svg" alt="" aria-hidden="true" loading="lazy"></span><span class="tech-name">VS Code</span></div>
+                <div class="tech-item"><span class="tech-glyph">{ }</span><span class="tech-name">API</span></div>
             </div>
         </div>
     </section>
@@ -416,6 +421,6 @@
     </footer>
 
     <script src="assets/vendor/glightbox/glightbox.min.js" defer></script>
-    <script src="assets/js/main.js?v=15" defer></script>
+    <script src="assets/js/main.js?v=17" defer></script>
 </body>
 </html>
