@@ -5,8 +5,15 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasHover = window.matchMedia('(hover: hover)').matches;
 
-  // --- Hover-scroll pan: constant speed regardless of image height. ---
-  var SPEED_PX_PER_S = 350;
+  // --- Hover-scroll pan: slow, readable scroll through the full screenshot. ---
+  // Duration scales with height but is clamped so short pages still feel slow
+  // and very tall pages don't take over half a minute to pan.
+  var SPEED_PX_PER_S = 180;
+  var MIN_PAN_S = 12;
+  var MAX_PAN_S = 26;
+  function panDuration(travelPx) {
+    return Math.min(Math.max(travelPx / SPEED_PX_PER_S, MIN_PAN_S), MAX_PAN_S);
+  }
 
   document.querySelectorAll('.work-card').forEach(function (card) {
     var frame = card.querySelector('.work-frame');
@@ -27,7 +34,7 @@
             img.removeEventListener('transitionend', resetHandler);
             resetHandler = null;
           }
-          img.style.transition = 'transform ' + (t / SPEED_PX_PER_S) + 's linear';
+          img.style.transition = 'transform ' + panDuration(t) + 's linear';
           img.style.transform = 'translateY(-' + t + 'px)';
         });
         card.addEventListener('mouseleave', function () {
