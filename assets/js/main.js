@@ -6,6 +6,37 @@
   document.documentElement.classList.add('js');
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- Theme toggle (light/dark, persisted) ---
+  var themeBtn = document.getElementById('theme-toggle');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      var isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+      var next = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-bs-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  }
+
+  // --- Preloader: count up, then reveal the page ---
+  var pre = document.getElementById('preloader');
+  if (pre) {
+    var dismiss = function () {
+      pre.classList.add('done');
+      setTimeout(function () { if (pre.parentNode) pre.parentNode.removeChild(pre); }, 700);
+    };
+    if (reduceMotion) {
+      setTimeout(dismiss, 250);
+    } else {
+      var countEl = pre.querySelector('.preloader-count');
+      var n = 0;
+      var iv = setInterval(function () {
+        n = Math.min(100, n + Math.floor(Math.random() * 9) + 5);
+        if (countEl) countEl.textContent = n + '%';
+        if (n >= 100) { clearInterval(iv); setTimeout(dismiss, 220); }
+      }, 70);
+    }
+  }
   var hasHover = window.matchMedia('(hover: hover)').matches;
 
   // --- Hover-scroll pan: slow, readable scroll through the full screenshot. ---
