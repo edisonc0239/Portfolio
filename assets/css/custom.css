@@ -211,8 +211,24 @@ h1, h2, h3, h4, .navbar-brand { font-family: var(--font-display); letter-spacing
   box-shadow: 0 20px 45px rgba(15, 23, 42, 0.14);
 }
 /* Structural: pan effect in main.js depends on fixed frame height + clipping. */
-.work-frame { height: 420px; overflow: hidden; background: #eef2f7; }
-.work-frame img { width: 100%; height: auto; display: block; will-change: transform; }
+.work-frame { position: relative; height: 420px; overflow: hidden; background: var(--bg); }
+.work-frame img { position: relative; z-index: 1; width: 100%; height: auto; display: block; transition: opacity .5s ease; will-change: transform; }
+/* Skeleton shimmer shown until the screenshot loads (only when JS is active,
+   so a no-JS visitor still sees the images). */
+html.js .work-frame img { opacity: 0; }
+html.js .work-card.is-loaded .work-frame img { opacity: 1; }
+html.js .work-frame::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background-color: #e9edf3;
+  background-image: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.6) 50%, transparent 80%);
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  transition: opacity .45s ease;
+}
+html.js .work-card.is-loaded .work-frame::after { opacity: 0; }
+@keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+[data-bs-theme="dark"] .work-frame::after { background-color: #20202b; background-image: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.06) 50%, transparent 80%); }
+@media (prefers-reduced-motion: reduce) { .work-frame::after { animation: none; } }
 
 /* ---- Process steps ---- */
 .step { height: 100%; padding: 1.9rem 1.6rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: 0 6px 20px rgba(15,23,42,0.05); transition: transform .25s ease, box-shadow .25s ease; }

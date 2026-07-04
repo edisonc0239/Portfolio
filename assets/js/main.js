@@ -49,6 +49,15 @@
     return Math.min(Math.max(travelPx / SPEED_PX_PER_S, MIN_PAN_S), MAX_PAN_S);
   }
 
+  // Skeleton loader: reveal each screenshot (and hide its shimmer) once it loads.
+  document.querySelectorAll('.work-card').forEach(function (card) {
+    var img = card.querySelector('.work-frame img');
+    if (!img) return;
+    var markLoaded = function () { card.classList.add('is-loaded'); };
+    if (img.complete && img.naturalWidth) markLoaded();
+    else img.addEventListener('load', markLoaded);
+  });
+
   document.querySelectorAll('.work-card').forEach(function (card) {
     var frame = card.querySelector('.work-frame');
     var img = frame.querySelector('img');
