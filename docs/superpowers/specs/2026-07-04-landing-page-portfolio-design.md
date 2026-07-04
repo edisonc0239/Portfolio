@@ -2,13 +2,13 @@
 
 **Date:** 2026-07-04
 **Status:** Draft — awaiting user review
-**Goal:** A portfolio that attracts paying clients for landing-page design/build work.
+**Goal:** A portfolio that attracts paying clients for web development work — landing pages, WooCommerce stores, and full business websites (user-corrected 2026-07-04: he is a web developer, not landing-pages-only).
 
 ## Concept
 
 **One single landing page** (user-confirmed — no demo sub-pages, no multi-page site). The page itself is the #1 proof of skill: if it's stunning and fast, it sells before a word is read. Proof of work comes from a **gallery of images/screenshots of your existing projects**, browsed via hover-scroll previews and a lightbox — visitors never leave the page.
 
-**Positioning line (draft):** "I build landing pages that turn clicks into customers." Every element of the page supports that one claim.
+**Positioning line:** "Websites that turn clicks into customers." Subline names the three offerings: landing pages, WooCommerce stores, full business websites. Every element of the page supports that claim.
 
 ## Decisions taken by default (override any of these)
 
