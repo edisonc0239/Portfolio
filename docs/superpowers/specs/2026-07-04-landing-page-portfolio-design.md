@@ -23,7 +23,8 @@
 
 ```
 /index.php          → The entire portfolio landing page
-/contact.php        → POST handler for the contact form (PHPMailer)
+/contact.php        → Invisible form endpoint (PHPMailer) — NOT a page; receives the
+                      form POST and returns JSON. Direct browser visits redirect to /
 /assets/css/        → Stylesheet
 /assets/js/         → Gallery hover-scroll, lightbox, interactions
 /assets/img/work/   → Full-page screenshots of your projects (tall images)
@@ -44,7 +45,7 @@ Two PHP files total. Project screenshots are data, not pages — adding a new pi
 5. **What's included / packages** — optional pricing anchors (e.g., "Landing page — from $X") or "packages" without prices. Prices filter tyre-kickers; decide later.
 6. **About** — short, human, one photo. Clients buy from people.
 7. **FAQ** — objections: timeline, revisions, hosting, ownership, cost.
-8. **Final CTA** — repeat "Book a free call" + contact form fallback.
+8. **Final CTA + contact form** — embedded at the bottom of the landing page (user-confirmed: no separate contact page, ever). "Book a free call" button plus a short form (name, email, message). The form submits via `fetch()` to the invisible `contact.php` endpoint — **no page reload, no redirect**: on success the form swaps inline to a "Thanks — I'll reply within 24h" message; on error it shows an inline retry message with a `mailto:` fallback. With JS disabled, the form falls back to a normal POST that redirects back to `index.php#contact?sent=1`.
 
 ## Work image requirements (each gallery entry)
 
