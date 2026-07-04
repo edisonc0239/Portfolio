@@ -166,4 +166,35 @@
         .finally(function () { btn.disabled = false; });
     });
   }
+
+  // --- Custom cursor: dot follows exactly, ring lags and grows on hover.
+  //     Desktop / fine-pointer only; off for touch and reduced-motion. ---
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (finePointer && !reduceMotion) {
+    var dot = document.createElement('div'); dot.className = 'cursor-dot';
+    var ring = document.createElement('div'); ring.className = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    document.documentElement.classList.add('has-cursor');
+    var mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my, sc = 1, targetSc = 1, on = false;
+    window.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      if (!on) { on = true; dot.classList.add('on'); ring.classList.add('on'); }
+    }, { passive: true });
+    (function loop() {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18; sc += (targetSc - sc) * 0.2;
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) scale(' + sc + ')';
+      requestAnimationFrame(loop);
+    })();
+    var hoverSel = 'a, button, .work-card, input, textarea, label, [role="button"]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest && e.target.closest(hoverSel)) { ring.classList.add('is-hover'); targetSc = 1.5; }
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest && e.target.closest(hoverSel)) { ring.classList.remove('is-hover'); targetSc = 1; }
+    });
+    document.addEventListener('mouseleave', function () { dot.classList.remove('on'); ring.classList.remove('on'); });
+    document.addEventListener('mouseenter', function () { dot.classList.add('on'); ring.classList.add('on'); });
+  }
 })();
