@@ -8,9 +8,9 @@
   // --- Hover-scroll pan: slow, readable scroll through the full screenshot. ---
   // Duration scales with height but is clamped so short pages still feel slow
   // and very tall pages don't take over half a minute to pan.
-  var SPEED_PX_PER_S = 180;
-  var MIN_PAN_S = 12;
-  var MAX_PAN_S = 26;
+  var SPEED_PX_PER_S = 120;
+  var MIN_PAN_S = 5;
+  var MAX_PAN_S = 20;
   function panDuration(travelPx) {
     return Math.min(Math.max(travelPx / SPEED_PX_PER_S, MIN_PAN_S), MAX_PAN_S);
   }
