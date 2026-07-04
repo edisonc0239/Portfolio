@@ -37,18 +37,6 @@
       }, 70);
     }
   }
-  var hasHover = window.matchMedia('(hover: hover)').matches;
-
-  // --- Hover-scroll pan: slow, readable scroll through the full screenshot. ---
-  // Duration scales with height but is clamped so short pages still feel slow
-  // and very tall pages don't take over half a minute to pan.
-  var SPEED_PX_PER_S = 120;
-  var MIN_PAN_S = 5;
-  var MAX_PAN_S = 20;
-  function panDuration(travelPx) {
-    return Math.min(Math.max(travelPx / SPEED_PX_PER_S, MIN_PAN_S), MAX_PAN_S);
-  }
-
   // Skeleton loader: reveal each screenshot (and hide its shimmer) once it loads.
   document.querySelectorAll('.work-card').forEach(function (card) {
     var img = card.querySelector('.work-frame img');
@@ -56,61 +44,6 @@
     var markLoaded = function () { card.classList.add('is-loaded'); };
     if (img.complete && img.naturalWidth) markLoaded();
     else img.addEventListener('load', markLoaded);
-  });
-
-  document.querySelectorAll('.work-card').forEach(function (card) {
-    var frame = card.querySelector('.work-frame');
-    var img = frame.querySelector('img');
-    var resetHandler = null;
-
-    // Recomputed per interaction so resizes/breakpoint reflows never go stale.
-    function travel() { return img.offsetHeight - frame.offsetHeight; }
-
-    function setup() {
-      if (reduceMotion) return;
-
-      if (hasHover) {
-        card.addEventListener('mouseenter', function () {
-          var t = travel();
-          if (t <= 0) return;
-          if (resetHandler) {
-            img.removeEventListener('transitionend', resetHandler);
-            resetHandler = null;
-          }
-          img.style.transition = 'transform ' + panDuration(t) + 's linear';
-          img.style.transform = 'translateY(-' + t + 'px)';
-        });
-        card.addEventListener('mouseleave', function () {
-          img.style.transition = 'transform 0.6s ease';
-          img.style.transform = 'translateY(0)';
-          resetHandler = function () {
-            img.style.transition = '';
-            img.removeEventListener('transitionend', resetHandler);
-            resetHandler = null;
-          };
-          img.addEventListener('transitionend', resetHandler);
-        });
-      } else {
-        // Touch devices: gentle teaser pan when the card scrolls into view.
-        var panned = false;
-        new IntersectionObserver(function (entries, obs) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting && !panned) {
-              panned = true;
-              var t = Math.min(travel(), 400);
-              if (t <= 0) { obs.unobserve(card); return; }
-              img.style.transition = 'transform 3s ease-in-out';
-              img.style.transform = 'translateY(-' + t + 'px)';
-              setTimeout(function () { img.style.transform = 'translateY(0)'; }, 3200);
-              obs.unobserve(card);
-            }
-          });
-        }, { threshold: 0.6 }).observe(card);
-      }
-    }
-
-    if (img.complete) setup();
-    else img.addEventListener('load', setup);
   });
 
   // --- Lightbox ---
