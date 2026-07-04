@@ -11,23 +11,34 @@
   document.querySelectorAll('.work-card').forEach(function (card) {
     var frame = card.querySelector('.work-frame');
     var img = frame.querySelector('img');
+    var resetHandler = null;
+
+    // Recomputed per interaction so resizes/breakpoint reflows never go stale.
+    function travel() { return img.offsetHeight - frame.offsetHeight; }
 
     function setup() {
-      var travel = img.offsetHeight - frame.offsetHeight;
-      if (travel <= 0 || reduceMotion) return;
-      img.style.transition = 'transform ' + (travel / SPEED_PX_PER_S) + 's linear';
+      if (reduceMotion) return;
 
       if (hasHover) {
         card.addEventListener('mouseenter', function () {
-          img.style.transform = 'translateY(-' + travel + 'px)';
+          var t = travel();
+          if (t <= 0) return;
+          if (resetHandler) {
+            img.removeEventListener('transitionend', resetHandler);
+            resetHandler = null;
+          }
+          img.style.transition = 'transform ' + (t / SPEED_PX_PER_S) + 's linear';
+          img.style.transform = 'translateY(-' + t + 'px)';
         });
         card.addEventListener('mouseleave', function () {
           img.style.transition = 'transform 0.6s ease';
           img.style.transform = 'translateY(0)';
-          img.addEventListener('transitionend', function reset() {
-            img.style.transition = 'transform ' + (travel / SPEED_PX_PER_S) + 's linear';
-            img.removeEventListener('transitionend', reset);
-          });
+          resetHandler = function () {
+            img.style.transition = '';
+            img.removeEventListener('transitionend', resetHandler);
+            resetHandler = null;
+          };
+          img.addEventListener('transitionend', resetHandler);
         });
       } else {
         // Touch devices: gentle teaser pan when the card scrolls into view.
@@ -36,7 +47,8 @@
           entries.forEach(function (e) {
             if (e.isIntersecting && !panned) {
               panned = true;
-              var t = Math.min(travel, 400);
+              var t = Math.min(travel(), 400);
+              if (t <= 0) { obs.unobserve(card); return; }
               img.style.transition = 'transform 3s ease-in-out';
               img.style.transform = 'translateY(-' + t + 'px)';
               setTimeout(function () { img.style.transform = 'translateY(0)'; }, 3200);
@@ -80,7 +92,10 @@
         headers: { 'Accept': 'application/json' },
         body: new FormData(form)
       })
-        .then(function (r) { return r.json(); })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
         .then(function (data) {
           if (data.success) {
             status.textContent = 'Thanks — I’ll reply within 24 hours.';
@@ -93,7 +108,7 @@
           }
         })
         .catch(function () {
-          status.textContent = 'Network error — please email me directly at jecortina13@gmail.com.';
+          status.textContent = 'Something went wrong — please email me directly at jecortina13@gmail.com.';
           status.classList.add('err');
         })
         .finally(function () { btn.disabled = false; });
