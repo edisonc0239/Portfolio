@@ -99,6 +99,7 @@
   if (tl && tlFill) {
     if (reduceMotion) {
       tlFill.style.height = '100%';
+      tlFill.classList.add('is-started');
     } else {
       // rAF loop with lerp smoothing, kicked by scroll — smooth trailing dot
       // travel that settles a few frames after scrolling stops.
@@ -115,6 +116,7 @@
         var settled = Math.abs(tlTarget - tlCurrent) < 0.0004;
         if (settled) tlCurrent = tlTarget;
         tlFill.style.height = (tlCurrent * 100) + '%';
+        tlFill.classList.toggle('is-started', tlCurrent > 0.008);
         // Light up each year as the green line reaches it.
         var fillPx = tlCurrent * tl.offsetHeight;
         for (var i = 0; i < tlItems.length; i++) {

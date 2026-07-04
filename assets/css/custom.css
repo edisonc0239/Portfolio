@@ -270,7 +270,8 @@ html.js .work-card.is-loaded .work-frame::after { opacity: 0; }
   background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb), 0.28) 25%, var(--accent));
   box-shadow: 0 0 8px 1px rgba(var(--accent-rgb), 0.55), 0 0 20px 3px rgba(var(--accent-rgb), 0.3);
 }
-.tl-fill::after { content: ""; position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%); width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle, rgba(var(--accent-rgb), 0.8) 0%, rgba(var(--accent-rgb), 0) 70%); }
+.tl-fill::after { content: ""; position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%); width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle, rgba(var(--accent-rgb), 0.8) 0%, rgba(var(--accent-rgb), 0) 70%); opacity: 0; transition: opacity .3s ease; }
+.tl-fill.is-started::after { opacity: 1; }
 .tl-item { position: relative; padding-bottom: 2.75rem; }
 .tl-item:last-child { padding-bottom: 0; }
 .tl-year { font-family: var(--font-display); font-weight: 700; color: var(--muted-2); font-size: 0.95rem; display: block; margin-bottom: 0.3rem; transition: color .3s ease; }
