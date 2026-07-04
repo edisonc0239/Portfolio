@@ -5,18 +5,25 @@
 
 /* ---- Fonts (self-hosted) ---- */
 @font-face {
-  font-family: 'Space Grotesk';
+  font-family: 'Archivo';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('../fonts/space-grotesk-500.woff2') format('woff2');
+  src: url('../fonts/archivo-500.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Space Grotesk';
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/archivo-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Archivo';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('../fonts/space-grotesk-700.woff2') format('woff2');
+  src: url('../fonts/archivo-700.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Inter';
@@ -54,7 +61,7 @@
   --accent-hi: #ffc24d;
   --accent-rgb: 255, 176, 32;
 
-  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Archivo', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --radius: 14px;
