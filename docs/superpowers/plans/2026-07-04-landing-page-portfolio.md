@@ -1,319 +1,86 @@
-# Landing-Page Portfolio Implementation Plan
+# Landing-Page Portfolio Implementation Plan (Static + Bootstrap 5 + GitHub Pages)
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a single-page PHP portfolio landing page with a hover-scroll work gallery, lightbox, and inline AJAX contact form, per `docs/superpowers/specs/2026-07-04-landing-page-portfolio-design.md`.
+**Goal:** Build a single static landing page portfolio with a hover-scroll work gallery, lightbox, and inline AJAX contact form, hosted free on GitHub Pages, per `docs/superpowers/specs/2026-07-04-landing-page-portfolio-design.md`.
 
-**Architecture:** One visitor-facing page (`index.php`) rendering sections from a PHP data array; one invisible JSON endpoint (`contact.php`) for the form; validation logic isolated in `lib/validate.php` so it is unit-testable. All assets self-hosted. No framework, no build step.
+**Architecture:** One `index.html` built on Bootstrap 5 (self-hosted, custom-themed), one custom stylesheet, one JS file. Contact email is sent by Web3Forms' API via `fetch()` — no backend of ours exists. Deploy = `git push` to GitHub with Pages enabled.
 
-**Tech Stack:** PHP 8+, vanilla JS, plain CSS, PHPMailer (Composer), GLightbox (self-hosted, MIT).
+**Tech Stack:** HTML5, Bootstrap 5.3+, vanilla JS, GLightbox (MIT, self-hosted), Web3Forms free tier, GitHub Pages.
 
-**Placeholders to confirm with user before/while executing:** personal brand name (default: "Edison"), city for SEO (default: "Sydney"), Cal.com booking URL, SMTP credentials, real work screenshots.
+**Placeholders to confirm with user during execution:** brand name on page (default "Edison"), city for SEO (default "Sydney"), Cal.com booking URL, Web3Forms access key (user signs up free with their email — takes 1 minute), real work screenshots.
 
 ---
 
 ## File Structure
 
 ```
-/index.php                    → the landing page (sections + $projects array at top)
-/contact.php                  → JSON form endpoint (POST only; GET redirects to /)
-/lib/validate.php             → pure function validating form input (testable)
-/config.sample.php            → SMTP config template (copy to config.php, gitignored)
-/assets/css/style.css         → all styles
-/assets/js/main.js            → gallery pan, lightbox init, form fetch
-/assets/vendor/glightbox/     → glightbox.min.css + glightbox.min.js (self-hosted)
-/assets/img/work/             → tall full-page screenshots (webp)
-/assets/img/                  → og.jpg, portrait, favicons
-/tests/validate_test.php      → plain-PHP assertions for lib/validate.php
+/index.html                          → the entire landing page
+/assets/css/custom.css               → Bootstrap overrides + all custom styles
+/assets/js/main.js                   → gallery pan, lightbox init, form fetch
+/assets/vendor/bootstrap/bootstrap.min.css
+/assets/vendor/bootstrap/bootstrap.bundle.min.js
+/assets/vendor/glightbox/glightbox.min.css
+/assets/vendor/glightbox/glightbox.min.js
+/assets/img/work/                    → tall full-page screenshots (webp)
+/assets/img/                         → og.jpg, portrait.webp, favicon.svg
 /.gitignore
+/.nojekyll                           → tells GitHub Pages to skip Jekyll processing
 ```
+
+No secrets exist anywhere in this project — the Web3Forms access key is public by design.
 
 ---
 
-### Task 1: Scaffold + config
+### Task 1: Scaffold + vendor assets
 
 **Files:**
-- Create: `.gitignore`, `config.sample.php`, `assets/img/work/.gitkeep`
+- Create: `.gitignore`, `.nojekyll`, vendor files, folder structure
 
 - [ ] **Step 1: Create `.gitignore`**
 
 ```gitignore
-config.php
-vendor/
 node_modules/
 .DS_Store
 Thumbs.db
 ```
 
-- [ ] **Step 2: Create `config.sample.php`**
+- [ ] **Step 2: Create folders and `.nojekyll`**
 
-```php
-<?php
-// Copy to config.php and fill in. config.php is gitignored.
-return [
-    'smtp_host'   => 'smtp.example.com',
-    'smtp_port'   => 587,
-    'smtp_user'   => 'you@example.com',
-    'smtp_pass'   => 'CHANGE-ME',
-    'mail_to'     => 'edison@clickclickmedia.com.au',
-    'mail_from'   => 'noreply@yourdomain.com',
-    'site_url'    => 'https://yourdomain.com',
-];
-```
+Run: `New-Item -ItemType Directory -Force assets/css, assets/js, assets/vendor/bootstrap, assets/vendor/glightbox, assets/img/work; New-Item -ItemType File .nojekyll`
 
-- [ ] **Step 3: Create empty dirs**
+- [ ] **Step 3: Download Bootstrap 5.3+ dist files**
 
-Run: `New-Item -ItemType Directory -Force assets/img/work, assets/css, assets/js, assets/vendor/glightbox, lib, tests; New-Item -ItemType File assets/img/work/.gitkeep`
+From https://github.com/twbs/bootstrap/releases/latest download the compiled dist zip; copy `css/bootstrap.min.css` and `js/bootstrap.bundle.min.js` into `assets/vendor/bootstrap/`.
 
-- [ ] **Step 4: Install PHPMailer**
+- [ ] **Step 4: Download GLightbox**
 
-Run: `composer require phpmailer/phpmailer`
-Expected: `vendor/phpmailer` exists. If Composer is unavailable on this machine, download the PHPMailer release zip and extract `src/` to `vendor/phpmailer/phpmailer/src/` with a manual autoload require in contact.php (note it in a comment).
+From https://github.com/biati-digital/glightbox (latest release) copy `glightbox.min.css` and `glightbox.min.js` into `assets/vendor/glightbox/`.
 
-- [ ] **Step 5: Download GLightbox**
+- [ ] **Step 5: Verify files exist**
 
-Fetch `glightbox.min.js` and `glightbox.min.css` from the latest GitHub release (https://github.com/biati-digital/glightbox) into `assets/vendor/glightbox/`.
+Run: `Get-ChildItem -Recurse assets/vendor | Select-Object Name`
+Expected: the four vendor files listed above.
 
 - [ ] **Step 6: Commit**
 
 ```bash
 git add -A
-git commit -m "chore: scaffold project structure, PHPMailer, GLightbox"
+git commit -m "chore: scaffold static structure, Bootstrap 5, GLightbox"
 ```
 
 ---
 
-### Task 2: Form validation library (TDD)
+### Task 2: index.html — full page skeleton
 
 **Files:**
-- Create: `lib/validate.php`
-- Test: `tests/validate_test.php`
+- Create: `index.html`
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Step 1: Write `index.html`**
 
-```php
-<?php // tests/validate_test.php
-require __DIR__ . '/../lib/validate.php';
+Bootstrap grid/utilities for layout; every section present; gallery cards are plain HTML blocks (adding work = copy a card). Complete file:
 
-function check(bool $cond, string $msg): void {
-    if (!$cond) { fwrite(STDERR, "FAIL: $msg\n"); exit(1); }
-    echo "ok: $msg\n";
-}
-
-// Valid input passes
-$r = validate_contact(['name' => 'Jane', 'email' => 'jane@x.com', 'message' => 'Need a landing page for my clinic.', 'website' => '']);
-check($r['ok'] === true, 'valid input passes');
-
-// Honeypot filled => silently rejected
-$r = validate_contact(['name' => 'Bot', 'email' => 'b@x.com', 'message' => 'hi there friend', 'website' => 'http://spam']);
-check($r['ok'] === false && $r['silent'] === true, 'honeypot rejected silently');
-
-// Bad email
-$r = validate_contact(['name' => 'Jane', 'email' => 'not-an-email', 'message' => 'hello hello hello', 'website' => '']);
-check($r['ok'] === false && $r['field'] === 'email', 'bad email rejected');
-
-// Empty name
-$r = validate_contact(['name' => '  ', 'email' => 'j@x.com', 'message' => 'hello hello hello', 'website' => '']);
-check($r['ok'] === false && $r['field'] === 'name', 'empty name rejected');
-
-// Message too short
-$r = validate_contact(['name' => 'Jane', 'email' => 'j@x.com', 'message' => 'hi', 'website' => '']);
-check($r['ok'] === false && $r['field'] === 'message', 'short message rejected');
-
-// Oversized fields rejected
-$r = validate_contact(['name' => str_repeat('a', 300), 'email' => 'j@x.com', 'message' => 'hello hello hello', 'website' => '']);
-check($r['ok'] === false && $r['field'] === 'name', 'oversized name rejected');
-
-echo "ALL PASS\n";
-```
-
-- [ ] **Step 2: Run test to verify it fails**
-
-Run: `php tests/validate_test.php`
-Expected: fatal error — `validate.php` not found / `validate_contact` undefined.
-
-- [ ] **Step 3: Write the implementation**
-
-```php
-<?php // lib/validate.php
-declare(strict_types=1);
-
-/**
- * Validate contact form input.
- * Returns ['ok' => true, 'data' => [...]] or
- * ['ok' => false, 'field' => ..., 'error' => ..., 'silent' => bool].
- * 'website' is a honeypot field — humans never fill it.
- */
-function validate_contact(array $in): array
-{
-    $name    = trim((string)($in['name'] ?? ''));
-    $email   = trim((string)($in['email'] ?? ''));
-    $message = trim((string)($in['message'] ?? ''));
-    $honey   = trim((string)($in['website'] ?? ''));
-
-    if ($honey !== '') {
-        return ['ok' => false, 'silent' => true, 'field' => 'website', 'error' => 'spam'];
-    }
-    if ($name === '' || mb_strlen($name) > 100) {
-        return ['ok' => false, 'silent' => false, 'field' => 'name', 'error' => 'Please enter your name.'];
-    }
-    if (mb_strlen($email) > 254 || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return ['ok' => false, 'silent' => false, 'field' => 'email', 'error' => 'Please enter a valid email.'];
-    }
-    if (mb_strlen($message) < 10 || mb_strlen($message) > 5000) {
-        return ['ok' => false, 'silent' => false, 'field' => 'message', 'error' => 'Message must be 10–5000 characters.'];
-    }
-    return ['ok' => true, 'data' => ['name' => $name, 'email' => $email, 'message' => $message]];
-}
-```
-
-- [ ] **Step 4: Run test to verify it passes**
-
-Run: `php tests/validate_test.php`
-Expected: 6 `ok:` lines then `ALL PASS`, exit code 0.
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add lib/validate.php tests/validate_test.php
-git commit -m "feat: contact form validation with honeypot (TDD)"
-```
-
----
-
-### Task 3: contact.php endpoint
-
-**Files:**
-- Create: `contact.php`
-
-- [ ] **Step 1: Write `contact.php`**
-
-```php
-<?php // contact.php — invisible form endpoint. Not a page.
-declare(strict_types=1);
-session_start();
-
-// Direct browser visits (GET) bounce to the landing page.
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /');
-    exit;
-}
-
-require __DIR__ . '/lib/validate.php';
-$config = require __DIR__ . '/config.php';
-
-$isAjax = ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'fetch';
-
-function respond(bool $ok, string $msg, bool $isAjax): void
-{
-    if ($isAjax) {
-        header('Content-Type: application/json');
-        echo json_encode(['ok' => $ok, 'message' => $msg]);
-    } else {
-        // Non-JS fallback: back to the form anchor with a status flag.
-        header('Location: /index.php?sent=' . ($ok ? '1' : '0') . '#contact');
-    }
-    exit;
-}
-
-// Rate limit: max 3 submissions per session per 10 minutes.
-$now = time();
-$_SESSION['contact_times'] = array_values(array_filter(
-    $_SESSION['contact_times'] ?? [],
-    fn($t) => $now - $t < 600
-));
-if (count($_SESSION['contact_times']) >= 3) {
-    respond(false, 'Too many messages — please try again later or email me directly.', $isAjax);
-}
-
-$result = validate_contact($_POST);
-if (!$result['ok']) {
-    if (!empty($result['silent'])) {
-        respond(true, 'Thanks — I will reply within 24 hours.', $isAjax); // fool bots
-    }
-    respond(false, $result['error'], $isAjax);
-}
-
-$_SESSION['contact_times'][] = $now;
-$d = $result['data'];
-
-require __DIR__ . '/vendor/autoload.php';
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-$mail = new PHPMailer(true);
-try {
-    $mail->isSMTP();
-    $mail->Host       = $config['smtp_host'];
-    $mail->SMTPAuth   = true;
-    $mail->Username   = $config['smtp_user'];
-    $mail->Password   = $config['smtp_pass'];
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = $config['smtp_port'];
-    $mail->setFrom($config['mail_from'], 'Portfolio Contact');
-    $mail->addAddress($config['mail_to']);
-    $mail->addReplyTo($d['email'], $d['name']);
-    $mail->Subject = 'New portfolio enquiry from ' . $d['name'];
-    $mail->Body    = "Name: {$d['name']}\nEmail: {$d['email']}\n\n{$d['message']}";
-    $mail->send();
-    respond(true, 'Thanks — I will reply within 24 hours.', $isAjax);
-} catch (Exception $e) {
-    error_log('Contact mail failed: ' . $mail->ErrorInfo);
-    respond(false, 'Something went wrong — please email me directly.', $isAjax);
-}
-```
-
-Note: `use` statements appear mid-file after `require` — PHP allows `use` only at top of file. **Place the two `use` lines directly under `declare(strict_types=1);` instead.** (Written here inline for reading order; the actual file must have them at top.)
-
-- [ ] **Step 2: Lint**
-
-Run: `php -l contact.php`
-Expected: `No syntax errors detected`
-
-- [ ] **Step 3: Smoke-test endpoint without SMTP**
-
-Copy `config.sample.php` to `config.php`. Run `php -S localhost:8000` in background, then:
-
-Run: `curl -s -X POST http://localhost:8000/contact.php -H "X-Requested-With: fetch" --data "name=&email=x&message=hi&website="`
-Expected: `{"ok":false,"message":"Please enter your name."}`
-
-Run: `curl -s -o /dev/null -w "%{http_code} %{redirect_url}" http://localhost:8000/contact.php`
-Expected: `302` redirecting to `/` (GET bounce works).
-
-(Real send is verified at deploy time with live SMTP creds.)
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add contact.php
-git commit -m "feat: AJAX contact endpoint with rate limit and PHPMailer"
-```
-
----
-
-### Task 4: index.php skeleton + projects data
-
-**Files:**
-- Create: `index.php`
-
-- [ ] **Step 1: Write `index.php`**
-
-```php
-<?php
-declare(strict_types=1);
-// ---- Work gallery data. Add a project = add an image + one entry here. ----
-$projects = [
-    [
-        'title' => 'Project One',
-        'niche' => 'Trades / Local services',
-        'note'  => 'Lead-gen landing page — enquiry-focused',
-        'img'   => 'assets/img/work/project-one.webp',
-        'url'   => null, // live URL or null
-    ],
-    // more entries...
-];
-$sent = $_GET['sent'] ?? null; // non-JS form fallback flag
-?>
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -323,10 +90,12 @@ $sent = $_GET['sent'] ?? null; // non-JS form fallback flag
     <meta name="description" content="I design and build fast, conversion-focused landing pages for businesses in Sydney and across Australia.">
     <meta property="og:title" content="Edison — Landing Page Designer">
     <meta property="og:description" content="Fast, conversion-focused landing pages.">
-    <meta property="og:image" content="/assets/img/og.jpg">
-    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/assets/vendor/glightbox/glightbox.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <meta property="og:image" content="https://USERNAME.github.io/portfolio/assets/img/og.jpg">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/glightbox/glightbox.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -334,113 +103,172 @@ $sent = $_GET['sent'] ?? null; // non-JS form fallback flag
       "name": "Edison",
       "jobTitle": "Landing Page Designer & Developer",
       "email": "mailto:edison@clickclickmedia.com.au",
-      "url": "https://yourdomain.com"
+      "url": "https://USERNAME.github.io/portfolio/"
     }
     </script>
 </head>
 <body>
-    <section id="hero">
-        <h1>Landing pages that turn clicks into customers.</h1>
-        <p>Design + build, conversion-first, launched fast.</p>
-        <a class="cta" href="#contact">Book a free call</a>
-    </section>
 
-    <section id="proof" aria-label="Proof">
-        <ul class="proof-bar">
-            <li><strong>&lt;1.5s</strong> load times</li>
-            <li><strong>95+</strong> Lighthouse scores</li>
-            <li><strong>7-day</strong> typical turnaround</li>
-        </ul>
-    </section>
+    <!-- HERO -->
+    <header id="hero" class="d-flex align-items-center min-vh-100">
+        <div class="container text-center">
+            <h1 class="display-1 fw-bold">Landing pages that turn<br>clicks into customers.</h1>
+            <p class="lead mt-3">Design + build, conversion-first, launched fast.</p>
+            <a class="btn btn-primary btn-lg mt-4" href="#contact">Book a free call</a>
+        </div>
+    </header>
 
-    <section id="work">
-        <h2>Selected work</h2>
-        <div class="gallery">
-            <?php foreach ($projects as $p): ?>
-            <a class="work-card"
-               href="<?= htmlspecialchars($p['img']) ?>"
-               data-glightbox="title: <?= htmlspecialchars($p['title']) ?>; description: <?= htmlspecialchars($p['note']) ?><?= $p['url'] ? ' — <a href=&quot;' . htmlspecialchars($p['url']) . '&quot; target=&quot;_blank&quot;>View live</a>' : '' ?>">
-                <span class="work-frame">
-                    <img src="<?= htmlspecialchars($p['img']) ?>" alt="<?= htmlspecialchars($p['title']) ?> — full page design" loading="lazy">
-                </span>
-                <span class="work-meta">
-                    <span class="work-title"><?= htmlspecialchars($p['title']) ?></span>
-                    <span class="work-niche"><?= htmlspecialchars($p['niche']) ?></span>
-                </span>
-            </a>
-            <?php endforeach; ?>
+    <!-- PROOF BAR -->
+    <section id="proof" class="py-4 border-top border-bottom">
+        <div class="container">
+            <div class="row text-center gy-3">
+                <div class="col-md-4"><strong>&lt;1.5s</strong> load times</div>
+                <div class="col-md-4"><strong>95+</strong> Lighthouse scores</div>
+                <div class="col-md-4"><strong>7-day</strong> typical turnaround</div>
+            </div>
         </div>
     </section>
 
-    <section id="process">
-        <h2>How it works</h2>
-        <ol class="steps">
-            <li><h3>Brief</h3><p>A short call to understand your offer and customers.</p></li>
-            <li><h3>Design</h3><p>A page built around one goal: getting you enquiries.</p></li>
-            <li><h3>Build</h3><p>Hand-coded, fast, responsive. No bloated templates.</p></li>
-            <li><h3>Launch</h3><p>Live on your domain, typically within 7 days.</p></li>
-        </ol>
+    <!-- WORK GALLERY -->
+    <section id="work" class="py-5">
+        <div class="container">
+            <h2 class="mb-5">Selected work</h2>
+            <div class="row g-4">
+                <!-- One card per project. To add work: copy this column block. -->
+                <div class="col-md-6 col-lg-4">
+                    <a class="work-card d-block"
+                       href="assets/img/work/project-one.webp"
+                       data-glightbox="title: Project One; description: Lead-gen landing page — Trades">
+                        <span class="work-frame d-block overflow-hidden rounded-3">
+                            <img src="assets/img/work/project-one.webp"
+                                 alt="Project One — full page design" loading="lazy">
+                        </span>
+                        <span class="d-flex justify-content-between mt-2">
+                            <span class="work-title">Project One</span>
+                            <span class="work-niche text-secondary">Trades</span>
+                        </span>
+                    </a>
+                </div>
+                <!-- more cards... -->
+            </div>
+        </div>
     </section>
 
-    <section id="about">
-        <h2>About</h2>
-        <p><!-- short human bio + photo --></p>
+    <!-- PROCESS -->
+    <section id="process" class="py-5">
+        <div class="container">
+            <h2 class="mb-5">How it works</h2>
+            <div class="row g-4">
+                <div class="col-md-3"><h3 class="h5">1. Brief</h3><p>A short call to understand your offer and customers.</p></div>
+                <div class="col-md-3"><h3 class="h5">2. Design</h3><p>A page built around one goal: getting you enquiries.</p></div>
+                <div class="col-md-3"><h3 class="h5">3. Build</h3><p>Hand-coded, fast, responsive. No bloated templates.</p></div>
+                <div class="col-md-3"><h3 class="h5">4. Launch</h3><p>Live on your domain, typically within 7 days.</p></div>
+            </div>
+        </div>
     </section>
 
-    <section id="faq">
-        <h2>FAQ</h2>
-        <!-- details/summary pairs: timeline, revisions, hosting, ownership, cost -->
+    <!-- ABOUT -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-md-4">
+                    <img src="assets/img/portrait.webp" alt="Edison" class="img-fluid rounded-3" loading="lazy">
+                </div>
+                <div class="col-md-8">
+                    <h2>About</h2>
+                    <p><!-- short human bio, first person, 3-4 sentences --></p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="contact">
-        <h2>Let’s build yours</h2>
-        <a class="cta" href="https://cal.com/CHANGE-ME" target="_blank" rel="noopener">Book a free call</a>
-        <p class="or">or send a message:</p>
-        <?php if ($sent === '1'): ?>
-            <p class="form-status ok">Thanks — I’ll reply within 24 hours.</p>
-        <?php elseif ($sent === '0'): ?>
-            <p class="form-status err">Something went wrong — please email me directly.</p>
-        <?php endif; ?>
-        <form id="contact-form" method="post" action="/contact.php" novalidate>
-            <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <label>Name <input type="text" name="name" required maxlength="100"></label>
-            <label>Email <input type="email" name="email" required maxlength="254"></label>
-            <label>Message <textarea name="message" required minlength="10" maxlength="5000" rows="5"></textarea></label>
-            <button type="submit">Send message</button>
-            <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
+    <!-- FAQ -->
+    <section id="faq" class="py-5">
+        <div class="container">
+            <h2 class="mb-4">FAQ</h2>
+            <div class="accordion" id="faq-acc">
+                <!-- Bootstrap accordion items: timeline, revisions, hosting, ownership, cost.
+                     Copy this item per question: -->
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#faq-1">
+                            How long does a landing page take?
+                        </button>
+                    </h3>
+                    <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#faq-acc">
+                        <div class="accordion-body">Typically 7 days from brief to launch.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <footer>
-        <p>© <?= date('Y') ?> Edison · <a href="mailto:edison@clickclickmedia.com.au">edison@clickclickmedia.com.au</a></p>
+    <!-- CONTACT -->
+    <section id="contact" class="py-5">
+        <div class="container" style="max-width: 640px;">
+            <h2 class="text-center">Let’s build yours</h2>
+            <div class="text-center my-4">
+                <a class="btn btn-primary btn-lg" href="https://cal.com/CHANGE-ME" target="_blank" rel="noopener">Book a free call</a>
+                <p class="text-secondary mt-3">or send a message:</p>
+            </div>
+            <form id="contact-form" method="POST" action="https://api.web3forms.com/submit" novalidate>
+                <input type="hidden" name="access_key" value="WEB3FORMS-ACCESS-KEY">
+                <input type="hidden" name="subject" value="New portfolio enquiry">
+                <input type="hidden" name="redirect" value="https://USERNAME.github.io/portfolio/#contact">
+                <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="mb-3">
+                    <label class="form-label" for="cf-name">Name</label>
+                    <input class="form-control" type="text" id="cf-name" name="name" required maxlength="100">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="cf-email">Email</label>
+                    <input class="form-control" type="email" id="cf-email" name="email" required maxlength="254">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="cf-message">Message</label>
+                    <textarea class="form-control" id="cf-message" name="message" required minlength="10" maxlength="5000" rows="5"></textarea>
+                </div>
+                <button class="btn btn-primary w-100" type="submit">Send message</button>
+                <p class="form-status mt-3 mb-0" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-4 text-center">
+        <p class="mb-0">© 2026 Edison · <a href="mailto:edison@clickclickmedia.com.au">edison@clickclickmedia.com.au</a></p>
     </footer>
 
-    <script src="/assets/vendor/glightbox/glightbox.min.js" defer></script>
-    <script src="/assets/js/main.js" defer></script>
+    <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <script src="assets/vendor/glightbox/glightbox.min.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
 </body>
 </html>
 ```
 
-- [ ] **Step 2: Lint and render check**
+Notes:
+- All asset paths are **relative** (no leading `/`) so the site works at `https://USERNAME.github.io/portfolio/` (project Pages serve from a subpath).
+- `WEB3FORMS-ACCESS-KEY`: user signs up free at https://web3forms.com with their email; the key is public by design, safe to commit.
+- With JS disabled the form still works: plain POST to Web3Forms, which honors the `redirect` field back to `#contact`.
 
-Run: `php -l index.php` → `No syntax errors detected`
-Run (server still up): `curl -s http://localhost:8000/ | Select-String "Selected work"`
-Expected: the heading appears; no PHP warnings in output.
+- [ ] **Step 2: Serve and render check**
+
+Run: `npx serve .` (or `python -m http.server 8000`), open the local URL.
+Expected: all sections render, Bootstrap accordion opens/closes, no console 404s except missing images.
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add index.php
-git commit -m "feat: landing page skeleton with gallery data array"
+git add index.html
+git commit -m "feat: landing page skeleton with Bootstrap 5"
 ```
 
 ---
 
-### Task 5: Gallery hover-scroll + lightbox + form JS
+### Task 3: JavaScript — gallery pan, lightbox, AJAX form
 
 **Files:**
 - Create: `assets/js/main.js`
-- Modify: `assets/css/style.css` (gallery rules — full file in Task 6)
 
 - [ ] **Step 1: Write `assets/js/main.js`**
 
@@ -477,13 +305,13 @@ git commit -m "feat: landing page skeleton with gallery data array"
           });
         });
       } else {
-        // Touch devices: gentle auto-pan when the card scrolls into view.
+        // Touch devices: gentle teaser pan when the card scrolls into view.
         var panned = false;
         new IntersectionObserver(function (entries, obs) {
           entries.forEach(function (e) {
             if (e.isIntersecting && !panned) {
               panned = true;
-              var t = Math.min(travel, 400); // short teaser pan
+              var t = Math.min(travel, 400);
               img.style.transition = 'transform 3s ease-in-out';
               img.style.transform = 'translateY(-' + t + 'px)';
               setTimeout(function () { img.style.transform = 'translateY(0)'; }, 3200);
@@ -509,21 +337,31 @@ git commit -m "feat: landing page skeleton with gallery data array"
     var status = form.querySelector('.form-status');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated'); // Bootstrap validation styles
+        return;
+      }
       var btn = form.querySelector('button[type=submit]');
       btn.disabled = true;
       status.textContent = 'Sending…';
-      status.className = 'form-status';
+      status.className = 'form-status mt-3 mb-0';
 
       fetch(form.action, {
         method: 'POST',
-        headers: { 'X-Requested-With': 'fetch' },
+        headers: { 'Accept': 'application/json' },
         body: new FormData(form)
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
-          status.textContent = data.message;
-          status.classList.add(data.ok ? 'ok' : 'err');
-          if (data.ok) form.reset();
+          if (data.success) {
+            status.textContent = 'Thanks — I’ll reply within 24 hours.';
+            status.classList.add('ok');
+            form.reset();
+            form.classList.remove('was-validated');
+          } else {
+            status.textContent = 'Something went wrong — please email me directly.';
+            status.classList.add('err');
+          }
         })
         .catch(function () {
           status.textContent = 'Network error — please email me directly at edison@clickclickmedia.com.au.';
@@ -535,14 +373,16 @@ git commit -m "feat: landing page skeleton with gallery data array"
 })();
 ```
 
-- [ ] **Step 2: Manual verification (with server running and at least one tall test image in `assets/img/work/`)**
+Note: GLightbox intercepts card clicks, so the lightbox opens instead of navigating to the image URL; the `href` remains a working no-JS fallback.
 
-Open `http://localhost:8000`:
-- Desktop: hovering a card pans the image bottom-ward at constant speed; leaving eases it back.
-- Click a card: GLightbox opens the full screenshot; page does not navigate.
-- Submit empty form: inline "Please enter your name." appears, no reload.
-- Submit valid data (dummy SMTP will fail): inline error message appears, no reload.
-- DevTools mobile emulation: cards teaser-pan on scroll into view.
+- [ ] **Step 2: Manual verification (server running, at least one tall test image in `assets/img/work/`)**
+
+- Desktop: hovering a card pans the image at constant speed; leaving eases it back.
+- Click a card: GLightbox opens; page does not navigate.
+- Submit empty form: Bootstrap validation messages show inline, nothing sent.
+- Submit valid data with a real access key: inline "Thanks" appears, no reload, email arrives.
+- DevTools mobile emulation: cards teaser-pan when scrolled into view.
+- DevTools reduced-motion emulation: no panning at all.
 
 - [ ] **Step 3: Commit**
 
@@ -553,34 +393,25 @@ git commit -m "feat: hover-scroll gallery, lightbox, AJAX form"
 
 ---
 
-### Task 6: Full styling (design pass)
+### Task 4: Full styling (design pass)
 
 **Files:**
-- Create: `assets/css/style.css`
+- Create: `assets/css/custom.css`
+- Modify: `index.html` (classes/markup refinements as the design demands)
 
-- [ ] **Step 1: Invoke a design skill for the visual system**
+- [ ] **Step 1: Load the `taste-skill` (or `soft-skill`) design standards** and design the visual system: dark, premium, editorial-modern per the spec. Theme Bootstrap via CSS custom properties (`--bs-body-bg`, `--bs-primary`, font stacks, etc.) so nothing looks like stock Bootstrap.
 
-This step is executed WITH the `taste-skill` (or `soft-skill`) design standards loaded — dark, premium, editorial-modern per the spec. The CSS below is the required structural baseline the design layer builds on; the design skill dictates tokens (type scale, palette, spacing) and section art direction.
-
-Required structural rules (must survive the design pass):
+Required structural rules that must survive the design pass:
 
 ```css
 /* Gallery — structure required by main.js */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-}
-.work-card { display: block; text-decoration: none; }
 .work-frame {
-  display: block;
   height: 420px;
-  overflow: hidden;        /* the pan effect depends on this */
-  border-radius: 12px;
+  overflow: hidden;          /* the pan effect depends on this */
 }
 .work-frame img {
   width: 100%;
-  height: auto;            /* natural (tall) height — never crop with object-fit */
+  height: auto;              /* natural (tall) height — never crop with object-fit */
   display: block;
   will-change: transform;
 }
@@ -592,32 +423,32 @@ Required structural rules (must survive the design pass):
 }
 ```
 
-- [ ] **Step 2: Complete all section styling** (hero, proof bar, process, about, FAQ, contact, footer) per the design skill's system. Real copy, no lorem ipsum.
+- [ ] **Step 2: Style every section** (hero, proof bar, gallery, process, about, FAQ accordion, contact, footer) with real copy — no lorem ipsum. Self-host any custom font (woff2, `font-display: swap`).
 
 - [ ] **Step 3: Verify responsive + reduced motion**
 
-- 375px, 768px, 1280px widths: no horizontal scroll, gallery reflows, form usable.
-- Toggle prefers-reduced-motion in DevTools: images static.
+- 375px, 768px, 1280px widths: no horizontal scroll, gallery reflows (1 / 2 / 3 columns), form usable.
+- Reduced-motion emulation: images static.
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add assets/css/style.css index.php
+git add assets/css/custom.css index.html
 git commit -m "feat: full visual design pass"
 ```
 
 ---
 
-### Task 7: SEO, OG image, favicons, performance
+### Task 5: SEO, OG image, favicons, performance
 
 **Files:**
-- Create: `assets/img/og.jpg`, `assets/img/favicon.svg`
-- Modify: `index.php` (head)
+- Create: `assets/img/og.jpg` (1200×630), `assets/img/favicon.svg`
+- Modify: `index.html` (head)
 
-- [ ] **Step 1: Produce OG image (1200×630) and favicon**, drop into `assets/img/`.
-- [ ] **Step 2: Convert all work screenshots to WebP ≤ 250KB each**, `loading="lazy"` confirmed on all gallery imgs.
-- [ ] **Step 3: Run Lighthouse** (Chrome DevTools, or `npx unlighthouse` if preferred) against `http://localhost:8000`.
-Expected: Performance/Accessibility/Best-Practices/SEO all ≥ 95. Fix regressions before proceeding.
+- [ ] **Step 1: Produce OG image and favicon**, drop into `assets/img/`; confirm `<head>` references resolve.
+- [ ] **Step 2: Convert all work screenshots to WebP ≤ 250KB each**; confirm `loading="lazy"` on all gallery images.
+- [ ] **Step 3: Run Lighthouse** (Chrome DevTools) against the local server.
+Expected: Performance/Accessibility/Best-Practices/SEO all ≥ 95. If Bootstrap's unused CSS drags Performance down, consider swapping `bootstrap.min.css` for a trimmed build — only if needed.
 - [ ] **Step 4: Commit**
 
 ```bash
@@ -627,22 +458,50 @@ git commit -m "feat: SEO meta, OG image, favicons, perf pass"
 
 ---
 
-### Task 8: Deploy
+### Task 6: Deploy to GitHub Pages
 
-- [ ] **Step 1:** Upload all files except `tests/`, `docs/`, `.git/` to the PHP host (or set docroot accordingly). Create `config.php` on the server from `config.sample.php` with real SMTP creds.
-- [ ] **Step 2:** Submit the live contact form once; confirm the email arrives and the inline success message shows.
-- [ ] **Step 3:** Verify `https://domain/contact.php` in a browser redirects to `/`.
-- [ ] **Step 4:** Run Lighthouse against the live URL. Expected ≥ 95 across categories.
-- [ ] **Step 5:** Tag release:
+- [ ] **Step 1: Create the GitHub repo and push**
+
+```bash
+gh repo create portfolio --public --source . --push
+```
+
+(Private repos can use Pages only on paid plans — public is the free path. The repo contains no secrets.)
+
+- [ ] **Step 2: Enable Pages**
+
+```bash
+gh api repos/{owner}/portfolio/pages -X POST -f "source[branch]=master" -f "source[path]=/"
+```
+
+Or via github.com → repo → Settings → Pages → Deploy from branch → `master` / root.
+
+- [ ] **Step 3: Update absolute URLs**
+
+Replace `USERNAME.github.io/portfolio` placeholders in `index.html` (OG image URL, JSON-LD url, form redirect) with the real Pages URL. Commit and push.
+
+- [ ] **Step 4: Verify live**
+
+- Open the live URL: all sections render, gallery pans, lightbox opens.
+- Submit the contact form once for real: email arrives at edison@clickclickmedia.com.au, inline success shows.
+- Run Lighthouse against the live URL. Expected ≥ 95 across categories.
+
+- [ ] **Step 5: (Optional, when ready) custom domain**
+
+Add `CNAME` file with the domain, configure DNS (CNAME → `USERNAME.github.io`), enable "Enforce HTTPS" in Pages settings, and update the absolute URLs again.
+
+- [ ] **Step 6: Tag release**
 
 ```bash
 git tag v1.0
+git push --tags
 ```
 
 ---
 
 ## Self-Review Notes
 
-- Spec coverage: hero/proof/gallery/process/about/FAQ/contact sections → Task 4; hover-scroll + lightbox + mobile pan + reduced motion → Task 5 + 6; AJAX no-reload form + non-JS fallback → Tasks 3–5; PHP-only stack → all; SEO/OG/schema → Tasks 4 + 7; performance criteria → Task 7 + 8. "What's included/packages" section from the spec is intentionally deferred (spec marks pricing as "decide later") — add as a section between #process and #about when the user decides.
-- `use` statement placement flagged inline in Task 3.
-- Types consistent: `validate_contact` return shape used identically in Task 2 and Task 3; `.work-frame`/`.work-card` class names match between Tasks 4, 5, 6.
+- Spec coverage: hero/proof/gallery/process/about/FAQ/contact sections → Task 2; hover-scroll + lightbox + mobile pan + reduced motion → Task 3 + 4; AJAX no-reload form + no-JS fallback + honeypot → Tasks 2–3; Bootstrap 5+ (user-requested) → Tasks 1, 2, 4; free GitHub Pages hosting (user-confirmed) → Task 6; SEO/OG/schema → Tasks 2 + 5; performance criteria → Tasks 5 + 6. "Packages/pricing" section intentionally deferred per spec ("decide later").
+- No PHP anywhere — prior plan's PHP tasks fully removed (user switched to static for free hosting).
+- Type/name consistency: `.work-card`/`.work-frame`/`.form-status` classes match across Tasks 2, 3, 4; form field names (`name`, `email`, `message`, `botcheck`, `access_key`) match Web3Forms' API.
+- No placeholders except user-owned values (access key, booking URL, username, screenshots), each flagged in the header.

@@ -14,24 +14,26 @@
 
 | Decision | Default | Why |
 |---|---|---|
-| Tech stack | PHP (single `index.php`) + CSS + vanilla JS | **User-confirmed: PHP, not HTML.** Instant page speed, native form handling |
-| Hosting | Any PHP host (cPanel/shared hosting or small VPS), custom domain, HTTPS | PHP rules out Vercel/Netlify static free tiers; standard LAMP hosting is cheap and the user likely has agency hosting available |
+| Tech stack | Static HTML + **Bootstrap 5+** + vanilla JS | **User-confirmed (supersedes earlier PHP decision):** free GitHub Pages hosting requires static; Bootstrap 5+ explicitly requested |
+| Hosting | **GitHub Pages** (free, HTTPS), optional custom domain via CNAME | User-confirmed. $0, fast CDN-backed hosting, deploy = git push |
+| Contact email | Web3Forms free tier (Formspree as alternative) via `fetch()` | Static hosting can't send email itself; free tier covers a portfolio's volume |
 | Conversion goal | "Book a free call" (Cal.com embed) + short contact form fallback | Lowest-friction path to a sales conversation |
 | Branding | Personal brand (your name) | Freelance credibility; can rebrand later |
 
 ## Site structure
 
 ```
-/index.php          → The entire portfolio landing page
-/contact.php        → Invisible form endpoint (PHPMailer) — NOT a page; receives the
-                      form POST and returns JSON. Direct browser visits redirect to /
-/assets/css/        → Stylesheet
-/assets/js/         → Gallery hover-scroll, lightbox, interactions
-/assets/img/work/   → Full-page screenshots of your projects (tall images)
-/assets/img/        → Photo, OG image, favicons
+/index.html                  → The entire portfolio landing page
+/assets/css/custom.css       → Custom styles + Bootstrap overrides
+/assets/js/main.js           → Gallery hover-scroll, lightbox, form fetch
+/assets/vendor/bootstrap/    → Bootstrap 5 dist (self-hosted CSS + JS bundle)
+/assets/vendor/glightbox/    → GLightbox (self-hosted)
+/assets/img/work/            → Full-page screenshots of your projects (tall images)
+/assets/img/                 → Photo, OG image, favicons
+/CNAME                       → Custom domain (only if/when one is connected)
 ```
 
-Two PHP files total. Project screenshots are data, not pages — adding a new piece of work means dropping in an image and adding one gallery entry.
+One HTML page total. The contact email is handled by Web3Forms (free): the form `fetch()`es their API with a public access key — no backend of ours exists anywhere. Adding new work means dropping in an image and copying one gallery card block.
 
 ## The page — section-by-section
 
@@ -45,7 +47,7 @@ Two PHP files total. Project screenshots are data, not pages — adding a new pi
 5. **What's included / packages** — optional pricing anchors (e.g., "Landing page — from $X") or "packages" without prices. Prices filter tyre-kickers; decide later.
 6. **About** — short, human, one photo. Clients buy from people.
 7. **FAQ** — objections: timeline, revisions, hosting, ownership, cost.
-8. **Final CTA + contact form** — embedded at the bottom of the landing page (user-confirmed: no separate contact page, ever). "Book a free call" button plus a short form (name, email, message). The form submits via `fetch()` to the invisible `contact.php` endpoint — **no page reload, no redirect**: on success the form swaps inline to a "Thanks — I'll reply within 24h" message; on error it shows an inline retry message with a `mailto:` fallback. With JS disabled, the form falls back to a normal POST that redirects back to `index.php#contact?sent=1`.
+8. **Final CTA + contact form** — embedded at the bottom of the landing page (user-confirmed: no separate contact page, ever). "Book a free call" button plus a short form (name, email, message). The form submits via `fetch()` to the Web3Forms API — **no page reload, no redirect**: on success the form swaps inline to a "Thanks — I'll reply within 24h" message; on error it shows an inline retry message with a `mailto:` fallback. Honeypot field (Web3Forms `botcheck`) for spam. With JS disabled, the form falls back to a normal POST to Web3Forms with a redirect back to `index.html#contact`.
 
 ## Work image requirements (each gallery entry)
 
@@ -60,13 +62,13 @@ Two PHP files total. Project screenshots are data, not pages — adding a new pi
 
 ## Technical
 
-- Plain PHP (no framework), one stylesheet, one JS file. Gallery entries defined as a PHP array at the top of `index.php` — adding work = one array item + one image.
+- Static HTML with **Bootstrap 5+** (self-hosted dist files, not CDN) for grid/components, heavily themed via CSS custom properties so it doesn't look like stock Bootstrap. One custom stylesheet, one JS file.
 - Fonts self-hosted, images in AVIF/WebP with proper sizing and lazy loading, zero render-blocking third-party scripts (Cal.com embed lazy-loaded).
-- Form handling: native PHP endpoint (`contact.php`) using PHPMailer via SMTP, with honeypot + rate-limit spam protection. No third-party form service needed.
-- Local development: PHP built-in server (`php -S localhost:8000`) — no XAMPP required unless preferred.
+- Form handling: Web3Forms free tier via `fetch()` with honeypot (`botcheck`) spam protection. The access key is public by design — safe to commit.
+- Local development: any static server (`npx serve` or `python -m http.server`).
 - SEO: title/meta targeting "landing page designer [city/AU]", Person + Service JSON-LD schema, OG image, favicon set.
 - Analytics: Plausible or GA4 to see which work gets attention.
-- Git repo from day one.
+- Git repo from day one; **deploy = push to GitHub, served by GitHub Pages** (free, HTTPS). No secrets exist in this project at all.
 
 ## Client-attraction layer (beyond the site)
 
