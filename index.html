@@ -79,78 +79,49 @@
                 <h2 class="section-title">Selected work</h2>
                 <p class="section-sub">Hover a project to scroll slowly through the full homepage. Click to view it full size.</p>
             </div>
-            <div class="row g-4">
-                <!-- One card per project. To add work: copy this column block, drop a full-page screenshot in assets/img/work/, and update the src/href, title and niche. -->
-                <div class="col-md-6 col-lg-4 reveal">
-                    <a class="work-card d-block"
-                       href="assets/img/work/vmr-truck-parts.jpg"
-                       data-glightbox="title: VMR Truck Parts; description: Truck parts online store">
+            <div class="row g-4" id="work-grid">
+                <!-- One card per project. To add work: drop a full-page screenshot in
+                     assets/img/work/ and copy a .work-item block, updating src/href/alt.
+                     Cards beyond the first 3 get the `hidden` attribute; the Load more
+                     button reveals them 3 at a time. -->
+                <div class="col-md-6 col-lg-4 reveal work-item">
+                    <a class="work-card d-block" href="assets/img/work/vmr-truck-parts.jpg">
                         <span class="work-frame d-block overflow-hidden">
-                            <img src="assets/img/work/vmr-truck-parts.jpg"
-                                 alt="VMR Truck Parts homepage" loading="lazy">
-                        </span>
-                        <span class="work-meta">
-                            <span class="work-title">VMR Truck Parts</span>
-                            <span class="work-niche">Truck Parts</span>
+                            <img src="assets/img/work/vmr-truck-parts.jpg" alt="VMR Truck Parts homepage" loading="lazy">
                         </span>
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal">
-                    <a class="work-card d-block"
-                       href="assets/img/work/echidna-built.jpg"
-                       data-glightbox="title: Echidna Built; description: Building &amp; construction website">
+                <div class="col-md-6 col-lg-4 reveal work-item">
+                    <a class="work-card d-block" href="assets/img/work/echidna-built.jpg">
                         <span class="work-frame d-block overflow-hidden">
-                            <img src="assets/img/work/echidna-built.jpg"
-                                 alt="Echidna Built homepage" loading="lazy">
-                        </span>
-                        <span class="work-meta">
-                            <span class="work-title">Echidna Built</span>
-                            <span class="work-niche">Construction</span>
+                            <img src="assets/img/work/echidna-built.jpg" alt="Echidna Built homepage" loading="lazy">
                         </span>
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal">
-                    <a class="work-card d-block"
-                       href="assets/img/work/skipkong.jpg"
-                       data-glightbox="title: SkipKong; description: Skip bin hire website">
+                <div class="col-md-6 col-lg-4 reveal work-item">
+                    <a class="work-card d-block" href="assets/img/work/skipkong.jpg">
                         <span class="work-frame d-block overflow-hidden">
-                            <img src="assets/img/work/skipkong.jpg"
-                                 alt="SkipKong homepage" loading="lazy">
-                        </span>
-                        <span class="work-meta">
-                            <span class="work-title">SkipKong</span>
-                            <span class="work-niche">Skip Bins</span>
+                            <img src="assets/img/work/skipkong.jpg" alt="SkipKong homepage" loading="lazy">
                         </span>
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal">
-                    <a class="work-card d-block"
-                       href="assets/img/work/prime-pumps.jpg"
-                       data-glightbox="title: Prime Pumps; description: Pump supplier website">
+                <div class="col-md-6 col-lg-4 reveal work-item" hidden>
+                    <a class="work-card d-block" href="assets/img/work/prime-pumps.jpg">
                         <span class="work-frame d-block overflow-hidden">
-                            <img src="assets/img/work/prime-pumps.jpg"
-                                 alt="Prime Pumps homepage" loading="lazy">
-                        </span>
-                        <span class="work-meta">
-                            <span class="work-title">Prime Pumps</span>
-                            <span class="work-niche">Pumps</span>
+                            <img src="assets/img/work/prime-pumps.jpg" alt="Prime Pumps homepage" loading="lazy">
                         </span>
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal">
-                    <a class="work-card d-block"
-                       href="assets/img/work/go2life.jpg"
-                       data-glightbox="title: GO2Life; description: Liquid supplements brand">
+                <div class="col-md-6 col-lg-4 reveal work-item" hidden>
+                    <a class="work-card d-block" href="assets/img/work/go2life.jpg">
                         <span class="work-frame d-block overflow-hidden">
-                            <img src="assets/img/work/go2life.jpg"
-                                 alt="GO2Life homepage" loading="lazy">
-                        </span>
-                        <span class="work-meta">
-                            <span class="work-title">GO2Life</span>
-                            <span class="work-niche">Wellness</span>
+                            <img src="assets/img/work/go2life.jpg" alt="GO2Life homepage" loading="lazy">
                         </span>
                     </a>
                 </div>
+            </div>
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-light btn-lg" id="load-more" type="button">Load more work</button>
             </div>
         </div>
     </section>

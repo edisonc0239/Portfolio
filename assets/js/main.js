@@ -71,8 +71,26 @@
   });
 
   // --- Lightbox ---
-  if (window.GLightbox) {
-    GLightbox({ selector: '.work-card' });
+  var lightbox = window.GLightbox ? GLightbox({ selector: '.work-card' }) : null;
+
+  // --- Load more: show 3 projects, reveal 3 more per click ---
+  var GALLERY_STEP = 3;
+  var items = [].slice.call(document.querySelectorAll('#work-grid .work-item'));
+  var moreBtn = document.getElementById('load-more');
+  if (moreBtn && items.length) {
+    var shown = GALLERY_STEP;
+    var render = function () {
+      items.forEach(function (it, i) { it.hidden = i >= shown; });
+      moreBtn.hidden = shown >= items.length;
+    };
+    render();
+    moreBtn.addEventListener('click', function () {
+      shown = Math.min(shown + GALLERY_STEP, items.length);
+      render();
+      if (lightbox && lightbox.reload) lightbox.reload();
+    });
+  } else if (moreBtn) {
+    moreBtn.hidden = true;
   }
 
   // --- Footer year ---
