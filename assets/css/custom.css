@@ -1,1 +1,4 @@
 /* Custom styles — populated in Task 4 */
+
+/* Honeypot — must stay visually hidden and out of the a11y tree */
+.hp { position: absolute; left: -9999px; }
