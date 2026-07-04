@@ -23,11 +23,11 @@
   --muted-2: #64748b;
   --border: rgba(15, 23, 42, 0.08);
   --border-strong: rgba(15, 23, 42, 0.14);
-  --accent: #4f46e5;
-  --accent-2: #6366f1;
-  --accent-3: #818cf8;
-  --accent-rgb: 79, 70, 229;
-  --accent-soft: rgba(79, 70, 229, 0.1);
+  --accent: #059669;
+  --accent-2: #10b981;
+  --accent-3: #34d399;
+  --accent-rgb: 5, 150, 105;
+  --accent-soft: rgba(5, 150, 105, 0.1);
 
   --font-display: 'Archivo', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -56,11 +56,11 @@
   --muted-2: #8b8b93;
   --border: rgba(255, 255, 255, 0.10);
   --border-strong: rgba(255, 255, 255, 0.18);
-  --accent: #6366f1;
-  --accent-2: #818cf8;
-  --accent-3: #a5b4fc;
-  --accent-rgb: 99, 102, 241;
-  --accent-soft: rgba(99, 102, 241, 0.16);
+  --accent: #10b981;
+  --accent-2: #34d399;
+  --accent-3: #6ee7b7;
+  --accent-rgb: 16, 185, 129;
+  --accent-soft: rgba(16, 185, 129, 0.16);
 }
 [data-bs-theme="dark"] .section-alt { background: #101019; }
 [data-bs-theme="dark"] .tech-logo .mono { filter: brightness(0) invert(0.72); }
@@ -256,8 +256,7 @@ h1, h2, h3, h4, .navbar-brand { font-family: var(--font-display); letter-spacing
 
 /* ---- Tech stack ---- */
 .tech-wrap { position: relative; }
-.tech-glow { position: absolute; left: 50%; top: 54%; transform: translate(-50%, -50%); width: min(760px, 92%); height: 340px; background: radial-gradient(circle, rgba(var(--accent-rgb), 0.16), transparent 70%); pointer-events: none; z-index: 0; }
-.tech-grid { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.tech-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 .tech-item { flex: 0 0 132px; aspect-ratio: 1 / 1; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; display: grid; place-items: center; box-shadow: 0 6px 18px rgba(15,23,42,0.06); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
 .tech-item:hover { transform: translateY(-5px); border-color: rgba(var(--accent-rgb),0.4); box-shadow: 0 16px 34px rgba(15,23,42,0.12); }
 .tech-logo { position: relative; width: 44%; line-height: 0; }
