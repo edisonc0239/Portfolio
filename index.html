@@ -22,7 +22,7 @@
     <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/glightbox/glightbox.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css?v=3">
+    <link rel="stylesheet" href="assets/css/custom.css?v=4">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -50,8 +50,8 @@
             </button>
             <div class="collapse navbar-collapse" id="nav-menu">
                 <ul class="navbar-nav ms-auto align-items-md-center">
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
                     <li class="nav-item ms-md-2"><a class="btn btn-primary btn-sm" href="#contact">Start a project</a></li>
@@ -73,6 +73,62 @@
             </div>
         </div>
     </header>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span>
+                <span class="marquee-item">Landing pages</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">WooCommerce stores</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">Business websites</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">WordPress</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">Speed &amp; SEO</span><span class="marquee-sep">&#9679;</span>
+            </span>
+            <span>
+                <span class="marquee-item">Landing pages</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">WooCommerce stores</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">Business websites</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">WordPress</span><span class="marquee-sep">&#9679;</span>
+                <span class="marquee-item">Speed &amp; SEO</span><span class="marquee-sep">&#9679;</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <h2 class="section-title">What I do</h2>
+                <p class="section-sub">End-to-end web development, from a single high-converting page to a full online store.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 reveal">
+                    <div class="service-card">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg></span>
+                        <div><h3>Landing pages</h3><p>Fast, focused pages built to turn ad clicks and visitors into enquiries.</p></div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal">
+                    <div class="service-card">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span>
+                        <div><h3>WooCommerce stores</h3><p>Complete online stores on WordPress and WooCommerce, ready to sell.</p></div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal">
+                    <div class="service-card">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
+                        <div><h3>Business websites</h3><p>Multi-page sites that present your brand clearly and bring in leads.</p></div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal">
+                    <div class="service-card">
+                        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
+                        <div><h3>Speed &amp; SEO</h3><p>Performance tuning and on-page SEO so your site loads fast and gets found.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- WORK GALLERY -->
     <section id="work" class="section">
@@ -163,8 +219,33 @@
         </div>
     </section>
 
+    <!-- TECH STACK -->
+    <section id="tech" class="section section-alt">
+        <div class="container tech-wrap">
+            <div class="tech-glow" aria-hidden="true"></div>
+            <div class="section-head text-center reveal">
+                <h2 class="section-title">Tech stack</h2>
+                <p class="section-sub">The tools I build with day to day.</p>
+            </div>
+            <div class="tech-grid reveal">
+                <div class="tech-item"><img src="assets/img/tech/wordpress.svg" alt="WordPress" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/woocommerce.svg" alt="WooCommerce" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/php.svg" alt="PHP" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/javascript.svg" alt="JavaScript" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/html5.svg" alt="HTML5" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/css.svg" alt="CSS" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/bootstrap.svg" alt="Bootstrap" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/jquery.svg" alt="jQuery" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/elementor.svg" alt="Elementor" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/mysql.svg" alt="MySQL" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/figma.svg" alt="Figma" loading="lazy"></div>
+                <div class="tech-item"><img src="assets/img/tech/git.svg" alt="Git" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- PROCESS -->
-    <section id="process" class="section section-alt">
+    <section id="process" class="section">
         <div class="container">
             <div class="section-head reveal">
                 <h2 class="section-title">How it works</h2>
@@ -329,6 +410,6 @@
 
     <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="assets/vendor/glightbox/glightbox.min.js" defer></script>
-    <script src="assets/js/main.js?v=3" defer></script>
+    <script src="assets/js/main.js?v=4" defer></script>
 </body>
 </html>
