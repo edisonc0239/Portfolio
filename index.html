@@ -23,7 +23,7 @@
     <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/glightbox/glightbox.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css?v=12">
+    <link rel="stylesheet" href="assets/css/custom.css?v=13">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -68,15 +68,30 @@
     </nav>
 
     <!-- HERO -->
-    <header id="hero" class="hero d-flex align-items-center">
+    <header id="hero" class="hero">
         <div class="hero-bg" aria-hidden="true"></div>
-        <div class="container hero-inner">
-            <p class="eyebrow hero-reveal hero-reveal-1">Freelance web developer · Sydney</p>
-            <h1 class="hero-title hero-reveal hero-reveal-2">I build fast websites that <span class="accent">grow your business</span>.</h1>
-            <p class="hero-sub lead hero-reveal hero-reveal-3">Custom WordPress sites, WooCommerce stores and landing pages, hand-coded to load fast and turn visitors into customers.</p>
-            <div class="hero-cta hero-reveal hero-reveal-4">
-                <a class="btn btn-primary btn-lg" href="#contact">Start a project</a>
-                <a class="btn btn-outline-light btn-lg" href="#work">View work</a>
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7 hero-inner">
+                    <p class="eyebrow hero-reveal hero-reveal-1">Available for freelance</p>
+                    <h1 class="hero-title hero-reveal hero-reveal-2">I build fast websites that <span class="accent">grow your business</span>.</h1>
+                    <p class="hero-sub lead hero-reveal hero-reveal-3">Custom WordPress sites, WooCommerce stores and landing pages, hand-coded to load fast and turn visitors into customers.</p>
+                    <div class="hero-cta hero-reveal hero-reveal-4">
+                        <a class="btn btn-primary btn-lg" href="#contact">Start a project</a>
+                        <a class="btn btn-outline-light btn-lg" href="#work">View work</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 hero-reveal hero-reveal-3 d-none d-lg-block">
+                    <div class="hero-visual">
+                        <div class="hero-card">
+                            <img src="assets/img/portrait.png" alt="Edison, web developer">
+                        </div>
+                        <span class="hero-badge hero-badge-tr" aria-hidden="true">&lt;/&gt;</span>
+                        <span class="hero-badge hero-badge-bl" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -230,8 +245,8 @@
     <section id="tech" class="section section-alt">
         <div class="container tech-wrap">
             <div class="section-head text-center reveal">
-                <h2 class="section-title">Tech stack</h2>
-                <p class="section-sub">The tools I build with day to day.</p>
+                <h2 class="section-title">Skills</h2>
+                <p class="section-sub">The technologies I design and build with.</p>
             </div>
             <div class="tech-grid reveal">
                 <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/wordpress.svg" alt="WordPress" loading="lazy"><img class="color" src="assets/img/tech/wordpress-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
@@ -244,6 +259,7 @@
                 <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/bootstrap.svg" alt="Bootstrap" loading="lazy"><img class="color" src="assets/img/tech/bootstrap-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
                 <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/jquery.svg" alt="jQuery" loading="lazy"><img class="color" src="assets/img/tech/jquery-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
                 <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/react.svg" alt="React" loading="lazy"><img class="color" src="assets/img/tech/react-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
+                <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/nodedotjs.svg" alt="Node.js" loading="lazy"><img class="color" src="assets/img/tech/nodedotjs-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
                 <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/mysql.svg" alt="MySQL" loading="lazy"><img class="color" src="assets/img/tech/mysql-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
                 <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/figma.svg" alt="Figma" loading="lazy"><img class="color" src="assets/img/tech/figma-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
                 <div class="tech-item"><span class="tech-logo"><img class="mono" src="assets/img/tech/git.svg" alt="Git" loading="lazy"><img class="color" src="assets/img/tech/git-c.svg" alt="" aria-hidden="true" loading="lazy"></span></div>
@@ -318,6 +334,49 @@
         </div>
     </section>
 
+    <!-- CAREER & EXPERIENCE -->
+    <section id="career" class="section section-alt">
+        <div class="container">
+            <div class="section-head text-center reveal">
+                <h2 class="section-title">Career &amp; <span class="accent">experience</span></h2>
+            </div>
+            <!-- Edit these with your real roles, years and descriptions. -->
+            <div class="timeline">
+                <div class="tl-track" aria-hidden="true"><span class="tl-fill"></span></div>
+                <div class="tl-item reveal">
+                    <span class="tl-year">Now</span>
+                    <h3 class="tl-role">Freelance Web Developer</h3>
+                    <span class="tl-sub">Independent · Sydney</span>
+                    <p class="tl-desc">Building custom websites, WooCommerce stores and landing pages for clients across Australia.</p>
+                </div>
+                <div class="tl-item reveal">
+                    <span class="tl-year">2024</span>
+                    <h3 class="tl-role">Web Developer</h3>
+                    <span class="tl-sub">Agency</span>
+                    <p class="tl-desc">Delivered client sites end to end, from landing pages to full WordPress and WooCommerce builds.</p>
+                </div>
+                <div class="tl-item reveal">
+                    <span class="tl-year">2023</span>
+                    <h3 class="tl-role">WordPress Developer</h3>
+                    <span class="tl-sub">Freelance &amp; projects</span>
+                    <p class="tl-desc">Custom themes, performance tuning and on-page SEO for small business websites.</p>
+                </div>
+                <div class="tl-item reveal">
+                    <span class="tl-year">2022</span>
+                    <h3 class="tl-role">Front-End Developer</h3>
+                    <span class="tl-sub">Self-taught &amp; projects</span>
+                    <p class="tl-desc">Learned HTML, CSS and JavaScript and shipped my first responsive websites.</p>
+                </div>
+                <div class="tl-item reveal">
+                    <span class="tl-year">2021</span>
+                    <h3 class="tl-role">Getting Started</h3>
+                    <span class="tl-sub">Begin learning</span>
+                    <p class="tl-desc">Started my journey into web development and design, and never looked back.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact" class="section">
         <div class="container">
@@ -357,6 +416,6 @@
     </footer>
 
     <script src="assets/vendor/glightbox/glightbox.min.js" defer></script>
-    <script src="assets/js/main.js?v=12" defer></script>
+    <script src="assets/js/main.js?v=13" defer></script>
 </body>
 </html>

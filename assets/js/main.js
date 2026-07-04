@@ -93,6 +93,29 @@
     window.addEventListener('load', sweep);
   }
 
+  // --- Career timeline: fill the rail (and move the glow) as it scrolls through view ---
+  var tl = document.querySelector('.timeline');
+  var tlFill = tl && tl.querySelector('.tl-fill');
+  if (tl && tlFill) {
+    if (reduceMotion) {
+      tlFill.style.height = '100%';
+    } else {
+      var tlTicking = false;
+      var updateFill = function () {
+        var rect = tl.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var prog = (vh * 0.8 - rect.top) / (rect.height + vh * 0.4);
+        prog = Math.max(0, Math.min(1, prog));
+        tlFill.style.height = (prog * 100) + '%';
+        tlTicking = false;
+      };
+      var onScrollTl = function () { if (!tlTicking) { tlTicking = true; requestAnimationFrame(updateFill); } };
+      window.addEventListener('scroll', onScrollTl, { passive: true });
+      window.addEventListener('resize', onScrollTl, { passive: true });
+      updateFill();
+    }
+  }
+
   // --- Footer year ---
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
