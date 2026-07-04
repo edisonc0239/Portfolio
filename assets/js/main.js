@@ -100,19 +100,27 @@
     if (reduceMotion) {
       tlFill.style.height = '100%';
     } else {
-      var tlTicking = false;
-      var updateFill = function () {
-        var rect = tl.getBoundingClientRect();
+      // rAF loop with lerp smoothing, kicked by scroll — smooth trailing dot
+      // travel that settles a few frames after scrolling stops.
+      var tlTarget = 0, tlCurrent = 0, tlRunning = false;
+      var measureTl = function () {
+        var r = tl.getBoundingClientRect();
         var vh = window.innerHeight || document.documentElement.clientHeight;
-        var prog = (vh * 0.8 - rect.top) / (rect.height + vh * 0.4);
-        prog = Math.max(0, Math.min(1, prog));
-        tlFill.style.height = (prog * 100) + '%';
-        tlTicking = false;
+        tlTarget = Math.max(0, Math.min(1, (vh * 0.62 - r.top) / (r.height * 0.82)));
       };
-      var onScrollTl = function () { if (!tlTicking) { tlTicking = true; requestAnimationFrame(updateFill); } };
-      window.addEventListener('scroll', onScrollTl, { passive: true });
-      window.addEventListener('resize', onScrollTl, { passive: true });
-      updateFill();
+      var tlTick = function () {
+        measureTl();
+        tlCurrent += (tlTarget - tlCurrent) * 0.09;
+        var settled = Math.abs(tlTarget - tlCurrent) < 0.0004;
+        if (settled) tlCurrent = tlTarget;
+        tlFill.style.height = (tlCurrent * 100) + '%';
+        if (!settled) requestAnimationFrame(tlTick); else tlRunning = false;
+      };
+      var startTl = function () { if (!tlRunning) { tlRunning = true; requestAnimationFrame(tlTick); } };
+      window.addEventListener('scroll', startTl, { passive: true });
+      window.addEventListener('resize', startTl, { passive: true });
+      measureTl(); tlCurrent = tlTarget; tlFill.style.height = (tlCurrent * 100) + '%';
+      startTl();
     }
   }
 
