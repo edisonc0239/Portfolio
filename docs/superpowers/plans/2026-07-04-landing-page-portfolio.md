@@ -102,7 +102,7 @@ Bootstrap grid/utilities for layout; every section present; gallery cards are pl
       "@type": "Person",
       "name": "Edison",
       "jobTitle": "Landing Page Designer & Developer",
-      "email": "mailto:edison@clickclickmedia.com.au",
+      "email": "mailto:jecortina13@gmail.com",
       "url": "https://USERNAME.github.io/portfolio/"
     }
     </script>
@@ -236,7 +236,7 @@ Bootstrap grid/utilities for layout; every section present; gallery cards are pl
     </section>
 
     <footer class="py-4 text-center">
-        <p class="mb-0">© 2026 Edison · <a href="mailto:edison@clickclickmedia.com.au">edison@clickclickmedia.com.au</a></p>
+        <p class="mb-0">© 2026 Edison · <a href="mailto:jecortina13@gmail.com">jecortina13@gmail.com</a></p>
     </footer>
 
     <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
@@ -364,7 +364,7 @@ git commit -m "feat: landing page skeleton with Bootstrap 5"
           }
         })
         .catch(function () {
-          status.textContent = 'Network error — please email me directly at edison@clickclickmedia.com.au.';
+          status.textContent = 'Network error — please email me directly at jecortina13@gmail.com.';
           status.classList.add('err');
         })
         .finally(function () { btn.disabled = false; });
@@ -483,7 +483,7 @@ Replace `USERNAME.github.io/portfolio` placeholders in `index.html` (OG image UR
 - [ ] **Step 4: Verify live**
 
 - Open the live URL: all sections render, gallery pans, lightbox opens.
-- Submit the contact form once for real: email arrives at edison@clickclickmedia.com.au, inline success shows.
+- Submit the contact form once for real: email arrives at jecortina13@gmail.com, inline success shows.
 - Run Lighthouse against the live URL. Expected ≥ 95 across categories.
 
 - [ ] **Step 5: (Optional, when ready) custom domain**
