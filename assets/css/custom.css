@@ -208,6 +208,11 @@ h1, h2, h3, h4, .navbar-brand { font-family: var(--font-display); letter-spacing
   .hero-badge-bl { animation: hero-float 4.6s ease-in-out infinite 0.4s; }
   @keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 }
+/* Compact hero card on mobile/tablet so the hero stays short */
+@media (max-width: 991.98px) {
+  .hero-visual { max-width: 340px; margin-top: 1.5rem; }
+  .hero-card { aspect-ratio: 16 / 9; }
+}
 .hero-title { font-size: clamp(2.8rem, 7vw, 5.3rem); font-weight: 700; line-height: 1.03; margin-bottom: 1.5rem; }
 .hero-title .accent {
   background: linear-gradient(100deg, var(--text) 0%, var(--accent) 55%, var(--accent-3) 100%);
