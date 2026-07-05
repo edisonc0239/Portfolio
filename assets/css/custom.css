@@ -111,10 +111,11 @@ h1, h2, h3, h4, .navbar-brand { font-family: var(--font-display); letter-spacing
   --bs-btn-border-radius: 999px;
   font-family: var(--font-body); font-weight: 600; letter-spacing: 0.01em;
   border-radius: 999px; padding-inline: 1.6rem;
-  transition: transform .15s ease, background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+  transition: transform .2s cubic-bezier(.16,1,.3,1), background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .25s ease;
 }
 .btn-lg { padding-block: 0.75rem; }
-.btn:active { transform: translateY(1px); }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
 .btn-primary {
   --bs-btn-color:#fff; --bs-btn-bg:var(--accent); --bs-btn-border-color:var(--accent);
   --bs-btn-hover-color:#fff; --bs-btn-hover-bg:var(--accent-2); --bs-btn-hover-border-color:var(--accent-2);
