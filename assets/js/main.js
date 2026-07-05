@@ -10,7 +10,7 @@
   // --- Hero typewriter ---
   var tw = document.getElementById('typewriter');
   if (tw) {
-    var twWords = ['WordPress sites', 'WooCommerce stores', 'landing pages', 'business websites', 'fast websites'];
+    var twWords = ['WordPress sites', 'WooCommerce stores', 'Shopify stores', 'landing pages', 'business websites'];
     if (reduceMotion) {
       tw.textContent = twWords[0];
     } else {
