@@ -7,6 +7,31 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // --- Hero typewriter ---
+  var tw = document.getElementById('typewriter');
+  if (tw) {
+    var twWords = ['WordPress sites', 'WooCommerce stores', 'landing pages', 'business websites', 'fast websites'];
+    if (reduceMotion) {
+      tw.textContent = twWords[0];
+    } else {
+      var twi = 0, tci = 0, twDeleting = false;
+      var twTick = function () {
+        var word = twWords[twi];
+        if (!twDeleting) {
+          tci++;
+          tw.textContent = word.slice(0, tci);
+          if (tci === word.length) { twDeleting = true; setTimeout(twTick, 1500); return; }
+        } else {
+          tci--;
+          tw.textContent = word.slice(0, tci);
+          if (tci === 0) { twDeleting = false; twi = (twi + 1) % twWords.length; }
+        }
+        setTimeout(twTick, twDeleting ? 45 : 85);
+      };
+      setTimeout(twTick, 700);
+    }
+  }
+
   // --- Theme toggle (light/dark, persisted) ---
   var themeBtn = document.getElementById('theme-toggle');
   if (themeBtn) {

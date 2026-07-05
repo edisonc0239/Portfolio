@@ -23,7 +23,7 @@
     <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/glightbox/glightbox.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css?v=23">
+    <link rel="stylesheet" href="assets/css/custom.css?v=24">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -57,7 +57,7 @@
         <a class="nav-brand" href="#hero"><img class="brand-logo" src="assets/img/logo.svg" alt="Edison logo"><span>Edison<span class="brand-dot">.</span></span></a>
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
-            <li><a href="#work">Work</a></li>
+            <li><a href="#work">Projects</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -78,13 +78,16 @@
                     <p class="hero-sub lead hero-reveal hero-reveal-3">Custom WordPress sites, WooCommerce stores and landing pages, hand-coded to load fast and turn visitors into customers.</p>
                     <div class="hero-cta hero-reveal hero-reveal-4">
                         <a class="btn btn-primary btn-lg" href="#contact">Start a project</a>
-                        <a class="btn btn-outline-light btn-lg" href="#work">View work</a>
+                        <a class="btn btn-outline-light btn-lg" href="#work">View projects</a>
                     </div>
                 </div>
                 <div class="col-lg-5 hero-reveal hero-reveal-3 d-none d-lg-block">
                     <div class="hero-visual">
                         <div class="hero-card">
-                            <img src="assets/img/hero-visual.png" alt="Edison, web developer">
+                            <div class="hero-type">
+                                <span class="hero-type-static">I build</span>
+                                <span class="hero-type-line"><span id="typewriter" class="hero-type-word"></span><span class="hero-type-caret" aria-hidden="true"></span></span>
+                            </div>
                         </div>
                         <span class="hero-badge hero-badge-tr" aria-hidden="true">&lt;/&gt;</span>
                         <span class="hero-badge hero-badge-bl" aria-hidden="true">
@@ -95,32 +98,6 @@
             </div>
         </div>
     </header>
-
-    <!-- MARQUEE (clients I've built for) -->
-    <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-            <span>
-                <span class="marquee-item">VMR Truck Parts</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Echidna Built</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">SkipKong</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Prime Pumps</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">GO2Life</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Darling Harbour Water Taxis</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Future Clinic</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Indi Creative</span><span class="marquee-sep">&#9679;</span>
-            </span>
-            <span>
-                <span class="marquee-item">VMR Truck Parts</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Echidna Built</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">SkipKong</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Prime Pumps</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">GO2Life</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Darling Harbour Water Taxis</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Future Clinic</span><span class="marquee-sep">&#9679;</span>
-                <span class="marquee-item">Indi Creative</span><span class="marquee-sep">&#9679;</span>
-            </span>
-        </div>
-    </div>
 
     <!-- SERVICES -->
     <section id="services" class="section">
@@ -162,7 +139,7 @@
     <section id="work" class="section section-alt">
         <div class="container">
             <div class="section-head reveal">
-                <h2 class="section-title">Selected work</h2>
+                <h2 class="section-title">Projects</h2>
                 <p class="section-sub">Click any project to view the full homepage.</p>
             </div>
             <div class="row g-4" id="work-grid">
@@ -426,6 +403,6 @@
     </footer>
 
     <script src="assets/vendor/glightbox/glightbox.min.js" defer></script>
-    <script src="assets/js/main.js?v=23" defer></script>
+    <script src="assets/js/main.js?v=24" defer></script>
 </body>
 </html>
