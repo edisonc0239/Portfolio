@@ -148,6 +148,9 @@ h1, h2, h3, h4, .navbar-brand { font-family: var(--font-display); letter-spacing
 .theme-toggle { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; margin-left: 0.15rem; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 .theme-toggle svg { width: 18px; height: 18px; }
+.nav-call { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; margin-left: 0.15rem; transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease; }
+.nav-call:hover { transform: translateY(-2px); background: var(--accent-2); box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.32); }
+.nav-call svg { width: 17px; height: 17px; }
 .theme-toggle .icon-sun { display: none; }
 [data-bs-theme="dark"] .theme-toggle .icon-moon { display: none; }
 [data-bs-theme="dark"] .theme-toggle .icon-sun { display: inline; }
